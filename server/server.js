@@ -1,32 +1,27 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
+const path = require("path")
 
 const users = require("./users.js")
 const statuses = require("./statuses.js")
-
-const PORT = 3000
-
+const PORT = process.env.PORT || 4000
 const API_DESC = `
-API Usage
-GET /                   - Display the homepage 
-GET /api/users          - Get all users
-GET /api/user/:id       - Get user by id
-GET /api/statuses       - Get all statuses
-GET /api/status/:id     - Get status by id
+    API Usage
+    GET /                   - Display the homepage 
+    GET /api/users          - Get all users
+    GET /api/user/:id       - Get user by id
+    GET /api/statuses       - Get all statuses
+    GET /api/status/:id     - Get status by id
 
-PUT /api/user?          - Create or update user using querystring, firstName, lastName, email, avatar
-PUT /api/status?        - Create or update status using querystring, ???? data
+    PUT /api/user?          - Create or update user using querystring, firstName, lastName, email, avatar
+    PUT /api/status?        - Create or update status using querystring, ???? data
 
-DELETE /api/users/:id   - Delete user by id
-DELETE /api/status/:id  - Delete status by id
-`
+    DELETE /api/users/:id   - Delete user by id
+    DELETE /api/status/:id  - Delete status by id`
 
 app.use(cors())
-
-app.get("/", (req, res) => {
-    res.send("Hello World!")
-})
+app.use(express.static(path.join(__dirname, '..', 'build/')))
 
 app.get("/api", (req, res) => {
     res.send(API_DESC)
@@ -56,14 +51,18 @@ app.put("/api/status", (req, res) => {
     res.send(statuses.createOrUpdate(req))
 })
 
-app.delete("/api/user", (req, res) => {
+app.delete("/api/user/:id", (req, res) => {
     res.send(users.remove(req))
 })
 
-app.delete("/api/status", (req, res) => {
+app.delete("/api/status/:id", (req, res) => {
     res.send(statuses.remove(req))
 })
 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'))
+})
+
 app.listen(PORT, () => {
-    console.log("Listening to port", PORT);
+    console.log("Listening to port", PORT)
 })
