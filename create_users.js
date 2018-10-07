@@ -5,6 +5,7 @@ function generateUser(){
 
     let r1 = Math.floor(Math.random() * n1.length);
     let first_name = `${n1[r1]}`;
+    
 
     let r2 = Math.floor(Math.random() * n2.length);
     let last_name = `${n2[r2]}`;
