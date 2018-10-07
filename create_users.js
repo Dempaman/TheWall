@@ -26,7 +26,6 @@ function generateUser(){
         email: email,
         url: url,
     }
-
 };
 
 function populateUserList(n) {
