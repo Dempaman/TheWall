@@ -38,6 +38,8 @@ class ProfileComp extends Component {
         <p className="profileEmailStl">{data.email}</p>
       </div>
     )*/
+    console.log(this.state.apiData);
+    console.log(this.state.randomProfile);
     return (
       <div className="mainProfileContainer">
         <div key={this.state.randomProfile._id}>
