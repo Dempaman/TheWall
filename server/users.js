@@ -9,14 +9,15 @@ let error = msg => {
 
 const users = {
     getAll: function() {
-        let res;
+      return new Promise((resolve, reject)=>{
 
+        let res;
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
                 return error(err.message)
             }
-    
+
             const db = client.db("theWall")
             const collection = db.collection("users")
 
@@ -27,13 +28,16 @@ const users = {
                     res = error(err.message)
                     return true
                 }
-                
+
                 res = docs
+                resolve(res)
             })
         })
+      });
 
-        return res || error("Could not get users, database is empty")
-    },    
+
+        //return res || error("Could not get users, database is empty")
+    },
     get: function(req) {
         let statusId = req.params.id
         return "You got me!"
@@ -50,13 +54,13 @@ const users = {
                 console.log(err)
                 return error(err.message)
             }
-    
+
             const db = client.db("theWall")
             const collection = db.collection("users")
-    
+
             try {
                 collection.deleteOne(ObjectId(statusId))
-    
+
                 client.close()
                 res = { msg: "Succesfully deleted user with id", statusId }
             }
