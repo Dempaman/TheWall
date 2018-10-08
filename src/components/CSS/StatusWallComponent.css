@@ -5,26 +5,106 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 .componentContainer{
-  width: 100%;
   background-color: transparent;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
 }
 
 .wallContainer{
-  width: 60%; 
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-left: 200px;
+}
 
+/*** Create Status Area ***/
+.createStatusContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 250px;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
+  box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
+}
+ .optionCreate{
+   width: 90%;
+   height: 35px;
+   display: flex;
+   border-bottom: 0.5px solid lightgray;
+ }
+.optionCreate p{
+  cursor: pointer;
+  font-size: 15px;
+  margin: 10px 0 0 0px;
+  border-bottom: 2px solid #3d5c99;
+  font-family: 'Montserrat', sans-serif;
+  color: #3d5c99;
+  letter-spacing: 0.5px;
+}
+
+.textAreaStatus{
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+  width: 90%;
+  padding: 10px;
+  height: 135px;
+  margin-top: 10px;
+  border: none;
+  border-bottom: 0.5px solid lightgray;
+  resize: none;
+}
+
+textarea::placeholder {
+  padding: 0 5px;
+}
+
+.postButtonContainer{
+  width: 95%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.postButton{
+  outline: none;
+  border: none;
+  height: 30px;
+  padding: 7px 50px;
+  background-color: #3d5c99;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  font-size: 13px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.settingsButton{
+  color: #3d5c99;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.settingsButton:hover{
+  text-decoration: underline;
 }
 /*** Status Component ***/
 .statusContainer{
-  width: 50%;
+  width: 500px;
   min-height: 200px;
-  margin-top: 20px;
-  background-color: #f7f7f7;
+  margin-top: 30px;
+  background-color: #ffffff;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
   box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);

@@ -1,1 +1,7 @@
-
+body{
+  background-color: #eceff1;
+}
+.mainCompContainer{
+  margin-top: 10px;
+  display: flex;
+}

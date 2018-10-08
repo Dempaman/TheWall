@@ -4,13 +4,14 @@ import './CSS/StatusWallComponent.css';
 class StatusWallComponent extends Component {
   render() {
     return (
-      <div className="componentContainer">
+
         <div className="wallContainer">
+          <CreateStatus />
           <Status />
           <Status />
           <Status />
         </div>
-      </div>
+
     );
   }
 }
@@ -24,7 +25,7 @@ class Status extends Component {
           <div className="userInfoCard">
             <img className="userImage" src="https://i.imgur.com/LBy4WcJ.jpg" />
             <div className="userNameTime">
-              <h4>Oskar Jonsson</h4>
+              <h4>Robert Beck</h4>
               <p>15:12</p>
             </div>
           </div>
@@ -40,4 +41,21 @@ class Status extends Component {
     );
   }
 }
+
+
+class CreateStatus extends Component {
+  render() {
+    return (
+      <div className="createStatusContainer">
+        <div className="optionCreate"><p>Status</p></div>
+        <textarea className="textAreaStatus" placeholder="What's up?"/>
+        <div className="postButtonContainer">
+          <button className="settingsButton">Settings</button>
+          <button className="postButton">Post</button>
+        </div>
+      </div>
+    );
+  }
+}
+
 export default StatusWallComponent;

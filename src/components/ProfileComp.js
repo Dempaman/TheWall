@@ -10,25 +10,25 @@ class ProfileComp extends Component {
   constructor(props){
     super(props);
     this.state = {
-      apiData: [];
+      apiData: []
     }
   }
 
   componentDidMount() {
-    this.fetchUsersFunction();
+    //this.fetchUsersFunction();
   }
 
   //Data från
-  fetchUsersFunction(){
+  /*fetchUsersFunction(){
     fetch(API)
     .then(response => response.json())
     .then(data => this.setState({ apiData: data }))
-  }
+  }*/
 
   render() {
     return (
       <div className="mainProfileContainer">
-        <div>
+        <div className="profileInformation">
           <img className="profileImg" src={profilePicture} alt="Profile Picture" />
           <p className="profileNameStl">Sebastian Gunnervald</p>
           <p className="profileEmailStl">sebastian.gunnervald@gmail.com</p>
