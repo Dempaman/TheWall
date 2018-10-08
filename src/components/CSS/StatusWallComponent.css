@@ -1,0 +1,84 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.componentContainer{
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.wallContainer{
+  width: 60%; 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+/*** Status Component ***/
+.statusContainer{
+  width: 50%;
+  min-height: 200px;
+  margin-top: 20px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
+  box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
+}
+
+.userInfoCard{
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  height: 40px;
+
+}
+
+.userImage{
+  margin-left: 20px;
+  height: 40px;
+  width: 40px;
+  background-color: lightgray;
+}
+
+.userNameTime{
+  display: flex;
+  font-family: 'Montserrat', sans-serif;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 7.5px;
+  height: 50px;
+  width: 200px;
+}
+
+.userNameTime p{
+  font-size: 13px;
+  margin-top: 4px;
+  color: #726f6f;
+}
+
+.userNameTime h4{
+  color: #3d5c99;
+  letter-spacing: 0.5px;
+}
+
+.statusText{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+}
+
+.statusText p{
+  margin: 10px 20px;
+  font-size: 14px;
+  word-wrap: break-word;
+  font-family: 'Montserrat', sans-serif;
+  color: #2f2f2f;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid lightgray;
+}
