@@ -1,4 +1,4 @@
-error = msg => {
+let error = msg => {
     return { "error": msg }
 }
 
