@@ -12,25 +12,9 @@ data structure example
         url: "www.nicepic.com/asaosaks"
     }
 
-    status: {
-        _id: xx
-        text: "hej jag heter per",
-        timestamp: 2018-02-08T07:46:48.195Z,
-        likes: [
-            userId,
-            userId2,
-            userId3
-        ],
-        comments: [
-            { 
-                userId: xx,
-                text: "Hej",
-                timestamp: 2018-02-08T08:46:48.195Z
-            }
-        ]
-    }
-
 */
+
+
 
 const Client = require("mongodb").MongoClient
 const ObjectID = require('mongodb').ObjectID;
@@ -70,17 +54,9 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
           // get that amount of random friends from that shuffled list.
           let selected = shuffled.slice(0,nr_of_friends) ;
 
-          // genereate statuses for the user
-          generated_statuses = []
-          // create random amount of statuses (between 10 and 30)
-          r = Math.floor(Math.random() * 20) + 10
-          for (j=0; j<r; j++){
-            generated_statuses.push(generateStatus())
-          }
-
           //update the specific user object.
           collection.updateOne({_id: ObjectID(data[i]._id)}, {
-            $set: {friends: selected, statuses: generated_statuses,}
+            $set: {friends: selected,}
           }, { upsert: true })
         }
 
