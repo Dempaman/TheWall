@@ -5,7 +5,7 @@ let error = msg => {
 const users = {
     getAll: function() {
         return "You got us!"
-    },  
+    },
     get: function(req) {
         let statusId = req.params.id
         return "You got me!"
@@ -19,6 +19,4 @@ const users = {
     }
 }
 
-module.exports = {
-    users
-}
+module.exports = users
