@@ -4,31 +4,31 @@ CREATES 1000 USER DOCUMENTS
 all data is randomly generated.
 
 data structure example
-  user: {
-    first_name: "per",
-    last_name: "fredriksson",
-    email: "per.fredriksson@gmail.com",
-    url: "www.nicepic.com/asaosaks",
-    friends: [5bba60edbff7353403a0e7f3,
-      5bba60edbff7353403a0e918,
-      5bba60edbff7353403a0e854,
-      5bba60edbff7353403a0e5e4,
-      5bba60edbff7353403a0e81a,
-      5bba60edbff7353403a0e74f,
-      5bba60edbff7353403a0e973,],
-    statuses: [
-      { text: "hej jag heter per",
-      timestamp: 2018-02-08T07:46:48.195Z,
-      likes: [],
-      comments: []
-      },
-      { text: "hej jag heter fredriksson i efternamn",
-        timestamp: 2017-04-30T06:23:06.910Z,
-        likes: [],
-        comments: []
-      }
-    ]
-  }
+    user: {
+        _id: xx
+        first_name: "per",
+        last_name: "fredriksson",
+        email: "per.fredriksson@gmail.com",
+        url: "www.nicepic.com/asaosaks"
+    }
+
+    status: {
+        _id: xx
+        text: "hej jag heter per",
+        timestamp: 2018-02-08T07:46:48.195Z,
+        likes: [
+            userId,
+            userId2,
+            userId3
+        ],
+        comments: [
+            { 
+                userId: xx,
+                text: "Hej",
+                timestamp: 2018-02-08T08:46:48.195Z
+            }
+        ]
+    }
 
 */
 
@@ -37,8 +37,6 @@ const ObjectID = require('mongodb').ObjectID;
 const url = "mongodb://127.0.0.1:27017"
 
 let all_inserted_users = []
-let = friends = []
-let = all_friends = []
 
 console.log('Connecting to MongoDB at', url)
 Client.connect(url, { useNewUrlParser: true }, (err, client) => {
@@ -141,9 +139,7 @@ function generateUser(){
         first_name: first_name,
         last_name: last_name,
         email: email,
-        url: url,
-        friends: [],
-        statuses: [],
+        url: url
     }
 
 };
