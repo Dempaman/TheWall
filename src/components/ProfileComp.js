@@ -4,8 +4,27 @@ import profilePicture from '../images/E3VsnEe.jpg';
 import profilePicture2 from '../images/LBy4WcJ.jpg';
 import profilePicture3 from '../images/p7FmrgH.jpg';
 import profilePicture4 from '../images/wC5ETq0.jpg';
+const APIDATA = ''
 
 class ProfileComp extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      apiData: [];
+    }
+  }
+
+  componentDidMount() {
+    this.fetchUsersFunction();
+  }
+
+  //Data från
+  fetchUsersFunction(){
+    fetch(API)
+    .then(response => response.json())
+    .then(data => this.setState({ apiData: data }))
+  }
+
   render() {
     return (
       <div className="mainProfileContainer">
