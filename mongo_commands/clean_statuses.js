@@ -1,4 +1,4 @@
-console.log("cleaning users")
+console.log("cleaning statuses")
 const MongoClient = require('mongodb').MongoClient;
 // Default URL for connecting to database
 const url = 'mongodb://localhost:27017';
