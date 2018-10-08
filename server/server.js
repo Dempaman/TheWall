@@ -8,7 +8,7 @@ const statuses = require("./statuses.js")
 const PORT = process.env.PORT || 4000
 const API_DESC = `
     API Usage
-    GET /                   - Display the homepage 
+    GET /                   - Display the homepage
     GET /api/users          - Get all users
     GET /api/user/:id       - Get user by id
     GET /api/statuses       - Get all statuses
@@ -28,7 +28,9 @@ app.get("/api", (req, res) => {
 })
 
 app.get("/api/users", (req, res) => {
-    res.send(users.getAll())
+  users.getAll(function(getAllUsers) {
+    res.send(getAllUsers);
+  })
 })
 
 app.get("/api/user/:id", (req, res) => {
