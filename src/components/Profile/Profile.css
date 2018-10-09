@@ -10,7 +10,7 @@ body{
   font-family: 'Montserrat', sans-serif;
 }
 .profileImg {
-  margin: 20px 20px 0 20px;
+  margin: 20px auto;
   border-radius: 50%;
   width: 82px;
 }
@@ -102,4 +102,11 @@ body{
 }
 .sugInnerFriendContainer{
   margin: 10px 0 0 5px;
+}
+
+.profileDiv{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }

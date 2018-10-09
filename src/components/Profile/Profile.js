@@ -40,10 +40,12 @@ class Profile extends Component {
     )*/
     return (
       <div className="mainProfileContainer">
-        <div key={this.state.randomProfile._id}>
-          <img className="profileImg" src={this.state.randomProfile.url} alt="Profile" />
-          <p className="profileNameStl">{this.state.randomProfile.first_name}</p>
-          <p className="profileEmailStl">{this.state.randomProfile.email}</p>
+        <div>
+          <div className="profileDiv" key={this.state.randomProfile._id}>
+            <img className="profileImg" src={this.state.randomProfile.url} alt="Profile" />
+            <p className="profileNameStl">{this.state.randomProfile.first_name}</p>
+            <p className="profileEmailStl">{this.state.randomProfile.email}</p>
+          </div>
         </div>
         <div className="editProfileButtonDiv">
           <button className="editProfileButton">Edit Profile</button>
