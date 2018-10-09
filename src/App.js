@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import ProfileComp from './components/ProfileComp.js';
-import StatusWallComponent from './components/StatusWallComponent.js';
+import Profile from './components/Profile/Profile.js';
+import Wall from './components/Wall/Wall.js';
+import Users from "./components/Users/Users.js";
 import Header from './components/Header.js';
 
 class App extends Component {
@@ -10,8 +11,9 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          <ProfileComp />
-          <StatusWallComponent />
+          <Profile />
+          <Wall />
+          <Users />
         </div>
       </div>
     );
