@@ -28,9 +28,9 @@ app.get("/api", (req, res) => {
 })
 
 app.get("/api/users", (req, res) => {
-    users.getAll().then((data)=>{
-      res.send(data)
-    })
+  users.getAll(function(getAllUsers) {
+    res.send(getAllUsers);
+  })
 })
 
 app.get("/api/user/:id", (req, res) => {
