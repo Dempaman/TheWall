@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body{
   background-color: #f9f9f9;
+}
+.profileInformation{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
 .profileImg {
   margin: 20px 20px 0 20px;
@@ -16,20 +23,23 @@ body{
 .mainProfileContainer {
   width: 300px;
   height: 700px;
-  margin: 10px;
+  margin: 0;
+  border-radius: 5px;
   background: #fff;
-  -moz-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-  -webkit-box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
-  box-shadow: 0 2px 3px 0px rgba(0, 0, 0, 0.16);
+  -webkit-box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
+  box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
 }
 
 .editProfileButton{
   background-color: #3b5998;
   border: none;
   color: #fff;
-  padding: 7px 28px;
+  padding: 7px 60px;
   font-family: arial;
   font-size: 0.7em;
+  font-family: 'Montserrat', sans-serif;
+
+
 }
 
 .editProfileButton:hover{
@@ -38,25 +48,30 @@ body{
 }
 
 .editProfileButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin: 15px;
   padding: 0px 0 20px 0;
   border-bottom: 1px solid #a9b7d299;
 }
 
 .profileNameStl{
+  margin-top: 10px;
   color: #5972a7;
   margin-bottom: 0px;
 }
 
 .profileEmailStl{
   margin: 0;
-  font-size: 0.65em;
+  font-size: 0.8em;
   color: #b5c0d8;
 }
 
 
 .sugFriendContainer{
-  margin: 15px;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 15px;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #a9b7d299;
@@ -78,14 +93,13 @@ body{
 
 .SugParagrafText{
   text-align: left;
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 .SugParagrafText > p {
   margin: 0;
   color: #5972a7;
 }
-
 .sugInnerFriendContainer{
-  margin: 0 20px;
+  margin: 10px 0 0 5px;
 }

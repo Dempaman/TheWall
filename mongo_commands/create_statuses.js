@@ -26,7 +26,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
     }
     const db = client.db("theWall")
     const collections = [db.collection("users"), db.collection("statuses")]
-    let n = 1000
+    let n = 100
 
     // first get all users currently in db.
     collections[0].find({}, {projection: {_id: 1}}).toArray(function(err, result) {
