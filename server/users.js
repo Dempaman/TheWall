@@ -29,7 +29,33 @@ const users = {
         return "You got me!"
     },
     createOrUpdate: function(req) {
-        return "You made me!"
+
+      const user_data = req.body
+
+      return new Promise((resolve, reject)=>{
+        let res;
+        Client.connect(url, { useNewUrlParser: true }, (err, client) => {
+            if(err) {
+                console.log(err)
+                return error(err.message)
+            }
+            const db = client.db("theWall")
+            const collection = db.collection("users")
+            if (user_data._id){
+              const query = {_id: ObjectID(user_data._id)};
+            }else{
+              const query = {};
+            }
+
+            collection.updateOne(query, {
+              $set: {friends: user_data.friends, first_name: user_data.first_name, last_name: user_data.last_name, url: user_data.url, email: user_data.email}
+            }, { upsert: true }, function(res, err){
+              console.log(res)
+              console.log(err)
+              resolve(res)
+            })
+        })
+      });
     },
     remove: function(req) {
         let res;
