@@ -30,7 +30,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
     }
     const db = client.db("theWall")
     const collection = db.collection("users")
-    let n = 1000
+    let n = 100
     let data = populateUserList(n)
 
     console.log(`Connection asserted. Inserting ${n} user documents`)
@@ -50,7 +50,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
           // shuffle the list with all users ids.
           let shuffled = all_inserted_users.sort(() => .5 - Math.random());
           // decide who many friends this user will have.
-          let nr_of_friends = (Math.floor(Math.random() * 300) + 100)
+          let nr_of_friends = Math.floor(Math.random() * 10) + 1
           // get that amount of random friends from that shuffled list.
           let selected = shuffled.slice(0,nr_of_friends) ;
 
@@ -68,26 +68,6 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
 
 /*------------------------------------------------------------------------------
 ------------------------------------------------------------------------------*/
-
-
-function generateStatus(){
-    // create one random status object.
-    const n1 = ['Fint väder idag.', 'Kul med skola.', 'Jag heter kanske bengt.', 'Vem var det som kastade?', 'Röker du mycket eller?', 'Du har fågel?', 'Fint folk kommer sent.', 'A wizard is never late.', 'Vem är jag?', 'Det var baskamig lite törrt.', 'Är jag vaken eller?', 'omg lasers, pew, pew, pew!', 'sy gytt!', 'Vad gör vi nu? ...eller va gör vi sen?', 'tjeeeennaaaaaa', 'Det är skön      t.',];
-
-    let r1 = Math.floor(Math.random() * n1.length);
-    let text = `${n1[r1]}`;
-
-    // create a random timestamp
-    timestamp = new Date(+(new Date()) - Math.floor(Math.random()*50000000000))
-
-    return {
-        text: text,
-        timestamp: timestamp,
-        likes: [],
-        comments: [],
-    }
-};
-
 
 function generateUser(){
     const n1 = ['alice', 'emma', 'erik', 'eric', 'peter', 'stina', 'umar', 'andreas', 'dennis', 'lina', 'fredrik', 'oskar', 'oscar', 'lisa', 'karolin', 'linn', 'liselotte', 'jacob', 'jakob', 'greta', 'david', 'per', 'petra', 'marie', 'ramtin', 'josefine', 'sanna', 'kristoffer', 'markus', 'sebastian', 'rikard', 'viktor', 'henrietta', 'evelina', 'anna', 'robert', 'jens', 'alexander', 'mimmi', 'christer', 'christian', 'tobias', 'maja', 'lars', 'klas', 'jonathan', 'jim', 'james', 'åke', 'joel', 'jolin', 'jolina', 'michael', 'malin', 'isabelle', 'calle', 'mahnor', 'samantha', 'kenneth', 'damon', 'jesper', 'rasmus', 'ola', 'filippa', 'dimas', 'emilia', 'henrik', 'lena', 'michaela', 'amelia', 'andré', 'joakim', 'joachim', 'matilda', 'kevin', 'kristian', 'annika', 'frida', 'hannes', 'sofie', 'lovisa', 'linda', 'martin', 'levi', 'vendela', 'anton', 'sara', 'sofia', 'oliver', 'oliva', 'ann', 'nellie'];
