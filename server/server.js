@@ -38,7 +38,9 @@ app.get("/api/user/:id", (req, res) => {
 })
 
 app.get("/api/statuses", (req, res) => {
-    res.send(statuses.getAll())
+  statuses.getAll().then((data)=>{
+    res.send(data)
+  })
 })
 
 app.get("/api/status/:id", (req, res) => {

@@ -8,6 +8,7 @@ let error = msg => {
 
 const statuses = {
     getAll: function() {
+      return new Promise((resolve, reject)=>{
         let res;
 
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
@@ -15,7 +16,7 @@ const statuses = {
                 console.log(err)
                 return error(err.message)
             }
-    
+
             const db = client.db("theWall")
             const collection = db.collection("statuses")
 
@@ -26,13 +27,14 @@ const statuses = {
                     res = error(err.message)
                     return true
                 }
-                
-                res = docs
-            })
-        })
 
-        return res || error("Could not get statuses, database is empty")
-    },  
+                res = docs
+                resolve(res)
+            })
+        });
+
+      });
+    },
     get: function(req) {
         let statusId = req.params.id
         return "You got me!"
@@ -49,13 +51,13 @@ const statuses = {
                 console.log(err)
                 return error(err.message)
             }
-    
+
             const db = client.db("theWall")
             const collection = db.collection("statuses")
-    
+
             try {
                 collection.deleteOne(ObjectId(statusId))
-    
+
                 client.close()
                 res = { msg: "Succesfully deleted status with id", statusId }
             }
