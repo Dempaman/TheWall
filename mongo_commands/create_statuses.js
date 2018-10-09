@@ -1,3 +1,18 @@
+/*
+
+CREATES AROUND 20 STATUS DOCUMENTS PER USER IN DB.
+all data is randomly generated.
+
+data structure example
+    status: {
+        _id: xx
+        text: "Det här är en riktigt schyst status."
+        author: _id,
+        timestamp: 2018-02-08T07:46:48.195Z,
+        likes: [],
+        comments: [],
+    }
+*/
 
 const Client = require("mongodb").MongoClient
 const ObjectID = require('mongodb').ObjectID;
