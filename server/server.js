@@ -47,12 +47,16 @@ app.get("/api/status/:id", (req, res) => {
     res.send(statuses.get(req))
 })
 
-app.put("/api/user", (req, res) => {
-    res.send(users.createOrUpdate(req))
+app.post("/api/user/", (req, res) => {
+    users.createOrUpdate(req).then((data)=>{
+      res.send(data)
+    })
 })
 
 app.put("/api/status", (req, res) => {
-    res.send(statuses.createOrUpdate(req))
+    statuses.createOrUpdate(req).then(data=>{
+      res.send(data)
+    })
 })
 
 app.delete("/api/user/:id", (req, res) => {
