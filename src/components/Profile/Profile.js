@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './CSS/ProfileComp.css';
-import profilePicture2 from '../images/LBy4WcJ.jpg';
-import profilePicture3 from '../images/p7FmrgH.jpg';
-import profilePicture4 from '../images/wC5ETq0.jpg';
+import './Profile.css';
+import profilePicture2 from '../../images/LBy4WcJ.jpg';
+import profilePicture3 from '../../images/p7FmrgH.jpg';
+import profilePicture4 from '../../images/wC5ETq0.jpg';
 const APIDATA = 'http://localhost:4000/api/users'
 
-class ProfileComp extends Component {
+class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -80,4 +80,4 @@ class ProfileComp extends Component {
   }
 }
 
-export default ProfileComp;
+export default Profile;
