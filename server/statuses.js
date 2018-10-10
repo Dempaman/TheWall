@@ -27,13 +27,11 @@ const statuses = {
                     res = error(err.message)
                     return true
                 }
-
                 res = docs
                 resolve(res)
             })
         });
-
-        return res || error("Could not get statuses, database is empty")
+      });
     },
     get: function(req) {
         let statusId = req.params.id
