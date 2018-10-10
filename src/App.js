@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Profile from './components/Profile/Profile.js';
 import Wall from './components/Wall/Wall.js';
-import Users from "./components/Users/Users.js";
+import SidebarRight from "./components/SidebarRight/SidebarRight.js"
 import Header from './components/Header.js';
 
 class App extends Component {
@@ -11,9 +11,9 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          <Profile />
-          <Wall />
-          <Users />
+            <Profile />
+            <Wall />
+            <SidebarRight />
         </div>
       </div>
     );
