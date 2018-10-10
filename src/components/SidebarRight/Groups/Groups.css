@@ -1,0 +1,86 @@
+.onlineGroups {
+    font-family: "Montserrat";
+    width: 300px;
+    overflow-y: auto;
+}
+
+.onlineGroups .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 0.5px solid lightgray;
+}
+
+.onlineGroups .title h3 {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.onlineGroups .title p {
+    font-size: 14px;
+}
+
+.onlineGroups ul li {
+    display: flex;
+    padding: 1.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    flex-direction: column;
+}
+
+.onlineGroups .info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.onlineGroups .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.onlineGroups .buttons button {
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    background-color: #3d5c99;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.onlineGroups .left {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.onlineGroups .right {
+    font-size: 12px;
+}
+
+.onlineGroups .greenCircle {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: #3d9942;
+}
+
+.onlineGroups .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.onlineGroups .userCount span {
+    color: #a2c1ff;
+}

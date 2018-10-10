@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Profile from './components/Profile/Profile.js';
 import Wall from './components/Wall/Wall.js';
-import Users from "./components/Users/Users.js";
+import SidebarRight from "./components/SidebarRight/SidebarRight.js"
 import Header from './components/Header.js';
 
 const APIDATA = 'http://localhost:4000/api/users'
@@ -42,7 +42,7 @@ class App extends Component {
             randomProfile={this.state.randomProfile}
           />
           <Wall />
-          <Users />
+          <SidebarRight />
         </div>
       </div>
     );
