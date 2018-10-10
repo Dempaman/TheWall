@@ -9,25 +9,9 @@ class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      apiData: [],
-      randomProfile: [],
+      apiData: this.props.apiData,
+      randomProfile: this.props.randomProfile,
     }
-  }
-
-  componentDidMount() {
-    this.fetchUsersFunction();
-  }
-
-  //Data från http://localhost:4000/api/users
-  fetchUsersFunction(){
-    fetch(APIDATA)
-    .then(response => response.json())
-    .then(data => this.setState(
-      {
-        apiData: data,
-        randomProfile: data[Math.floor(Math.random() * data.length)]
-      })
-    )
   }
 
   render() {
@@ -41,10 +25,10 @@ class Profile extends Component {
     return (
       <div className="mainProfileContainer">
         <div>
-          <div className="profileDiv" key={this.state.randomProfile._id}>
-            <img className="profileImg" src={this.state.randomProfile.url} alt="Profile" />
-            <p className="profileNameStl">{this.state.randomProfile.first_name}</p>
-            <p className="profileEmailStl">{this.state.randomProfile.email}</p>
+          <div className="profileDiv" key={this.props.randomProfile._id}>
+            <img className="profileImg" src={this.props.randomProfile.url} alt="Profile" />
+            <p className="profileNameStl">{this.props.randomProfile.first_name}</p>
+            <p className="profileEmailStl">{this.props.randomProfile.email}</p>
           </div>
         </div>
         <div className="editProfileButtonDiv">
