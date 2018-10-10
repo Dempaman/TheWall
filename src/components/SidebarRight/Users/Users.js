@@ -10,7 +10,7 @@ class Users extends Component {
         }
     }
 
-    fetchUsers(callback) {
+    fetchUsers() {
         fetch("http://localhost:4000/api/users/")
         .then( res => res.json())
         .then( data => {
@@ -29,6 +29,8 @@ class Users extends Component {
     render() {
         return (
             <div className="onlineUsers">
+                <button onClick={this.testApi}>Test Me!</button>
+
                 <div className="title">
                     <h3>Online Users</h3>
                     <p>({this.state.users.length})</p>
