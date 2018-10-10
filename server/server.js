@@ -27,20 +27,6 @@ const API_DESC = `
 app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'build/')))
 
-app.get("/api/groups", (req, res) => {
-    groups.getAll(function(getAllGroups) {
-        res.send(getAllGroups);
-    })
-})
-
-app.put("/api/group/:id/join/:uid", (req, res) => {
-    res.send(true)
-})
-
-app.put("/api/group/:id/leave/:uid", (req, res) => {
-    res.send(true)
-})
-
 app.get("/api", (req, res) => {
     res.send(API_DESC)
 })
@@ -83,6 +69,24 @@ app.delete("/api/user/:id", (req, res) => {
 
 app.delete("/api/status/:id", (req, res) => {
     res.send(statuses.remove(req))
+})
+
+app.get("/api/groups", (req, res) => {
+    groups.getAll(function(getAllGroups) {
+        res.send(getAllGroups);
+    })
+})
+
+app.put("/api/group/:id/join/:uid", (req, res) => {
+    groups.join(req.params.id, req.params.uid, function(joinGroup) {
+        res.send(joinGroup);
+    })
+})
+
+app.put("/api/group/:id/leave/:uid", (req, res) => {
+    groups.leave(req.params.id, req.params.uid, function(leaveGroup) {
+        res.send(leaveGroup);
+    })
 })
 
 app.get('*', (req, res) => {

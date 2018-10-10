@@ -6,8 +6,7 @@
         description: "Everybody who loves Kent join this group!",
         members: [
             { 
-                _id: ObjectId("xx"),
-                url: http://imgur.com/x.png
+                ObjectId("xx")
             }
         ],
     }
