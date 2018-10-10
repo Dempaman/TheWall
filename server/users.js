@@ -33,7 +33,7 @@ const users = {
       const user_data = req.body
 
       return new Promise((resolve, reject)=>{
-        let res;
+        let res, query;
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -42,9 +42,9 @@ const users = {
             const db = client.db("theWall")
             const collection = db.collection("users")
             if (user_data._id){
-              const query = {_id: ObjectID(user_data._id)};
+                query = {_id: ObjectId(user_data._id)};
             }else{
-              const query = {};
+                query = {};
             }
 
             collection.updateOne(query, {
