@@ -6,8 +6,28 @@ class Groups extends Component {
         super(props)
 
         this.state = {
-            users: []
+            groups: []
         }
+    }
+
+    fetchGroups() {
+        fetch("http://localhost:4000/api/groups/")
+        .then( res => res.json())
+        .then( data => {
+            this.setState({ groups: data }, () => console.log(this.state))
+        })
+    }
+
+    componentDidMount() {
+        this.fetchGroups()
+    }
+
+    joinGroup(groupId, userId) {
+
+    }
+
+    leaveGroup(groupId, userId) {
+
     }
     
     render() {
@@ -15,37 +35,32 @@ class Groups extends Component {
             <div className="onlineGroups">
                 <div className="title">
                     <h3>All Groups</h3>
-                    <p>Members</p>
                 </div>
                 <ul>
-                    <li>
-                        <div className="info">
-                            <div className="left">
-                                We who love Kent
-                            </div>
-                            <div className="right">
-                                20
-                            </div>
-                        </div>
-                        <div className="buttons">
-                            <button>Join Group</button>
-                            <button>Info</button>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="info">
-                            <div className="left">
-                                Hasses Angels
-                            </div>
-                            <div className="right">
-                                300
-                            </div>
-                        </div>
-                        <div className="buttons">
-                            <button>Join Group</button>
-                            <button>Info</button>
-                        </div>
-                    </li>
+                    { this.state.groups.map( group => {
+                        return (
+                            <li key={group._id}>
+                                <div className="left">
+                                    <p>{ group.name }</p>
+                                    <button><p>Join</p></button>
+                                </div>
+                                <div className="right">
+                                    <p>{ group.description }</p>
+                                    <div className="memberSelection">
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                        <img src="https://i.imgur.com/LBy4WcJ.jpg" alt="avatar" />
+                                    </div>
+                                </div>
+                            </li>
+                        )
+                    })}
                 </ul>
             </div>
         )
