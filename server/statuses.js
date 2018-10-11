@@ -43,7 +43,7 @@ const statuses = {
       const status_data = req.body
 
       return new Promise((resolve, reject)=>{
-        let res, query;
+        let query;
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -71,8 +71,6 @@ const statuses = {
 
     },
     remove: function(id, callback) {
-        let res;
-
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -84,14 +82,13 @@ const statuses = {
 
             try {
                 collection.deleteOne(ObjectId(id))
-
-                client.close()
                 callback({ msg: "Succesfully deleted status with id", id })
             }
             catch(err) {
-                client.close()
                 callback(error(err.message))
             }
+
+            client.close()
         })
     }
 }
