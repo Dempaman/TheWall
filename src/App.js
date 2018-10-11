@@ -60,7 +60,7 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          <Profile user={this.state.user} users={this.props.users} />
+          <Profile user={this.state.user} users={this.state.users} />
           <Wall />
           { this.state.groupsLoaded
             ? this.state.usersLoaded
