@@ -7,8 +7,8 @@ class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      onlineFriends: [],
-      show: false
+        user: this.props.user,
+        show: false
     }
   }
 
@@ -39,10 +39,10 @@ class Profile extends Component {
     return (
       <div className="mainProfileContainer">
         <div>
-          <div className="profileDiv" key={this.props.randomProfile._id}>
-            <img className="profileImg" src={this.props.randomProfile.url} alt="Profile" />
-            <p className="profileNameStl">{this.props.randomProfile.first_name}</p>
-            <p className="profileEmailStl">{this.props.randomProfile.email}</p>
+          <div className="profileDiv" key={this.props.user._id}>
+            <img className="profileImg" src={this.props.user.url} alt="Profile" />
+            <p className="profileNameStl">{this.props.user.first_name}</p>
+            <p className="profileEmailStl">{this.props.user.email}</p>
           </div>
         </div>
         <div className="editProfileButtonDiv">

@@ -43,7 +43,7 @@ const statuses = {
       const status_data = req.body
 
       return new Promise((resolve, reject)=>{
-        let res;
+        let res, query;
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -52,9 +52,9 @@ const statuses = {
             const db = client.db("theWall")
             const collection = db.collection("statuses")
             if (status_data._id){
-              const query = {_id: ObjectID(status_data._id)};
+                query = {_id: ObjectId(status_data._id)};
             }else{
-              const query = {};
+                query = {};
             }
 
             collection.updateOne(query, {
