@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
+import arrowUp from './icons8-chevron-up-26.png';
+import arrowDown from './icons8-chevron-down-26.png';
 import './Profile.css';
-import profilePicture2 from '../../images/LBy4WcJ.jpg';
-import profilePicture3 from '../../images/p7FmrgH.jpg';
-import profilePicture4 from '../../images/wC5ETq0.jpg';
 
 class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
         user: this.props.user,
+        users: [],
+        show: false
     }
   }
 
+  findFunction(){
+    var friendList= []
+    for(let i = 0; i < 3; i++){
+      const result = this.props.users.find( friend => friend._id === this.props.user.friends[i] );
+      friendList.push(result)
+    }
+    this.setState({users: friendList})
+    this.setState({ show: !this.state.show })
+  }
+
   render() {
-  /* const list = this.state.apiData.map(data =>
-      <div key={data._id}>
-        <img className="profileImg" src={profilePicture} alt="Profile" />
-        <p className="profileNameStl">{data.first_name}</p>
-        <p className="profileEmailStl">{data.email}</p>
+
+  const list = this.state.users.map(data =>
+      <div className="sugFriendStl"  key={data._id}>
+        <img className="sugProfileImg" src={data.url} alt="Profile" />
+        <p>{data.first_name}</p>
+        <p>{data.last_name}</p>
       </div>
-    )*/
+    )
+    
     return (
       <div className="mainProfileContainer">
         <div>
@@ -36,26 +49,10 @@ class Profile extends Component {
           <div className="sugFriendContainer">
             <div className="SugParagrafText">
               <p>Online Friends</p>
+              <img onClick={() => this.findFunction()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
             </div>
             <div className="sugInnerFriendContainer">
-              <div className="sugFriendStl">
-                <div>
-                  <img className="sugProfileImg" src={profilePicture2} alt="Profile sug" />
-                </div>
-                <p>Robert Beck</p>
-              </div>
-              <div className="sugFriendStl">
-                <div>
-                  <img className="sugProfileImg" src={profilePicture3} alt="Profile sug" />
-                </div>
-                <p>Åke Harvonen</p>
-              </div>
-              <div className="sugFriendStl">
-                <div>
-                  <img className="sugProfileImg" src={profilePicture4} alt="Profile sug" />
-                </div>
-                <p>André Wikander</p>
-              </div>
+              {this.state.show ? <div>{list}</div> :false}
             </div>
           </div>
         </div>
