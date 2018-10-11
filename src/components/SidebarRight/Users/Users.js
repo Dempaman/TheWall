@@ -6,24 +6,18 @@ class Users extends Component {
         super(props)
 
         this.state = {
-            users: []
+            users: [],
+            loaded: false
         }
     }
 
-    fetchUsers(callback) {
-        fetch("http://localhost:4000/api/users/")
-        .then( res => res.json())
-        .then( data => {
-            // Sort array of users randomly and then get first nUsers amount of users.
-            let nUsers = Math.floor(Math.random() * 10) + 5;
-            let randomUsers = data.sort(() => 0.5 - Math.random()).slice(0, nUsers);
-
-            this.setState({ users: randomUsers }, () => console.log(this.state))
-        })
-    }
-
     componentDidMount() {
-        this.fetchUsers()
+        let users = this.props.users
+        // Sort array of users randomly and then get first nUsers amount of users.
+        let nUsers = Math.floor(Math.random() * 10) + 5
+        let randomUsers = users.sort(() => 0.5 - Math.random()).slice(0, nUsers)
+
+        this.setState({ users: randomUsers, loaded: true })
     }
     
     render() {
@@ -34,21 +28,24 @@ class Users extends Component {
                     <p>({this.state.users.length})</p>
                 </div>
                 
-                <ul>
-                    { this.state.users.map( user => {
-                        return (
-                        <li key={user._id}>
-                            <div className="left">
-                                <img className="avatar" src={user.url} alt="Avatar" />
-                                <p>{user.first_name + " " + user.last_name}</p>
-                            </div>
-                            <div className="right">
-                                <div className="greenCircle" />
-                            </div>
-                        </li>
-                        )
-                    }) }
-                </ul>
+                { this.state.loaded 
+                    ?   <ul>
+                            { this.state.users.map( user => {
+                                return (
+                                <li key={user._id}>
+                                    <div className="left">
+                                        <img className="avatar" src={user.url} alt="Avatar" />
+                                        <p>{user.first_name + " " + user.last_name}</p>
+                                    </div>
+                                    <div className="right">
+                                        <div className="greenCircle" />
+                                    </div>
+                                </li>
+                                )
+                            }) }
+                        </ul>
+                    :   <p>Loading Users...</p>
+                }
             </div>
         )
     }

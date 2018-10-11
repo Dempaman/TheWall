@@ -21,7 +21,6 @@ class Wall extends Component {
 
   componentDidMount() {
     this.fetchStatus();
-    //this.logi();
   }
 
   matchStatusUser(){
@@ -43,10 +42,7 @@ class Wall extends Component {
     }
     this.setState({matchedStatus: statusList})
   }
-//db.users.aggregate([{$match: {email: "nellie.johansson@gmail.com"}}])
-  /*matchStatusUser(){
-    this.state.apiStatus._id
-  }*/
+
 
   fetchStatus(){
     fetch(API)

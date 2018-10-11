@@ -5,32 +5,55 @@ import Wall from './components/Wall/Wall.js';
 import SidebarRight from "./components/SidebarRight/SidebarRight.js"
 import Header from './components/Header.js';
 
-const APIDATA = 'http://localhost:4000/api/users'
+const apiUsersEndpoint = 'http://localhost:4000/api/users'
+const apiGroupsEndpoint = "http://localhost:4000/api/groups"
+const apiStatusesEndpoint = "http://localhost:4000/api/statuses"
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      apiData: [],
-      randomProfile: [],
+        users: [],
+        groups: [],
+        statuses: [],
+        user: {},
+        usersLoaded: false,
+        groupsLoaded: false
     }
   }
 
-  componentDidMount() {
-    this.fetchUsersFunction();
-  }
+    componentDidMount() {
+        this.fetchUsers()
+        this.fetchStatuses()
+        this.fetchGroups()
+    }
 
-  //Data från http://localhost:4000/api/users
-  fetchUsersFunction(){
-    fetch(APIDATA)
-    .then(response => response.json())
-    .then(data => this.setState(
-      {
-        apiData: data,
-        randomProfile: data[Math.floor(Math.random() * data.length)]
-      })
-    )
-  }
+    fetchUsers = () => {
+        fetch(apiUsersEndpoint)
+        .then(response => response.json())
+        .then(data => this.setState({
+                users: data,
+                user: data[Math.floor(Math.random() * data.length)],
+                usersLoaded: true
+            })
+        )
+    }
+
+    fetchGroups = () => {
+        fetch(apiGroupsEndpoint)
+        .then(res => res.json())
+        .then(data => this.setState({ groups: data, groupsLoaded: true }))
+    }
+
+    fetchStatuses = () => {
+        fetch(apiStatusesEndpoint)
+        .then(res => res.json())
+        .then(data => this.setState({ statuses: data }))
+    }
+
+    refreshGroups = () => {
+        this.fetchGroups()
+    }
 
 
 
@@ -39,13 +62,13 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          <Profile
-            apiData={this.state.apiData}
-            randomProfile={this.state.randomProfile}
-          />
-
-          {this.state.apiData.length > 0 ? <Wall usersId={this.state.apiData}/> : null}
-          <SidebarRight />
+          <Profile user={this.state.user} />
+          {this.state.users.length > 0 ? <Wall usersId={this.state.apiData}/> : null}
+          { this.state.groupsLoaded
+            ? this.state.usersLoaded
+                ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} />
+                : null
+            : null }
         </div>
       </div>
     );
