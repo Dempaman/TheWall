@@ -14,7 +14,7 @@ class Status extends Component {
                     </div>
                     <div className="info">
                         <button className="infoDots">...</button>
-                        <div className="options">
+                        <div className="options hidden">
                             <button>Edit</button>
                             <button>Delete</button>
                         </div>
