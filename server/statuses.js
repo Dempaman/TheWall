@@ -81,7 +81,7 @@ const statuses = {
 
             try {
                 collection.deleteOne(ObjectId(id))
-                callback({ msg: "Succesfully deleted status with id", id })
+                callback({ msg: "Succesfully deleted status with id " + id })
             }
             catch(err) {
                 callback(error(err.message))
