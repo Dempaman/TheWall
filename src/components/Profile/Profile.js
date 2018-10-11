@@ -8,31 +8,26 @@ class Profile extends Component {
     super(props);
     this.state = {
         user: this.props.user,
-        users: [],
-        show: false
+        userFriends: this.props.userFriends,
+        show: true
     }
   }
 
-  findFunction(){
-    var friendList= []
-    for(let i = 0; i < 3; i++){
-      const result = this.props.users.find( friend => friend._id === this.props.user.friends[i] );
-      friendList.push(result)
-    }
-    this.setState({users: friendList})
+  toggleDiv() {
     this.setState({ show: !this.state.show })
   }
 
   render() {
 
-  const list = this.state.users.map(data =>
+  const list = this.props.userFriends.map(data =>
       <div className="sugFriendStl"  key={data._id}>
         <img className="sugProfileImg" src={data.url} alt="Profile" />
         <p>{data.first_name}</p>
         <p>{data.last_name}</p>
       </div>
-    )
-    
+
+  )
+
     return (
       <div className="mainProfileContainer">
         <div>
@@ -49,7 +44,7 @@ class Profile extends Component {
           <div className="sugFriendContainer">
             <div className="SugParagrafText">
               <p>Online Friends</p>
-              <img onClick={() => this.findFunction()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
+              <img onClick={() => this.toggleDiv()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
             </div>
             <div className="sugInnerFriendContainer">
               {this.state.show ? <div>{list}</div> :false}

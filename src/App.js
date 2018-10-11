@@ -17,6 +17,7 @@ class App extends Component {
         groups: [],
         statuses: [],
         user: {},
+        userFriends: [],
         usersLoaded: false,
         groupsLoaded: false
     }
@@ -35,6 +36,8 @@ class App extends Component {
                 users: data,
                 user: data[Math.floor(Math.random() * data.length)],
                 usersLoaded: true
+            }, () => {
+              this.findFriends()
             })
         )
     }
@@ -55,16 +58,22 @@ class App extends Component {
         this.fetchGroups()
     }
 
-
+    findFriends(){
+        var friendList= []
+        for(let i = 0; i < 3; i++){
+            const result = this.state.users.find( friend => friend._id === this.state.user.friends[i] );
+            friendList.push(result)
+        }
+            this.setState({userFriends: friendList})
+    }
 
   render() {
     return (
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          <Profile user={this.state.user} />
-          {this.state.users.length > 0 ? <Wall usersId={this.state.users}/> : null}
-
+          <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} />
+          <Wall />
           { this.state.groupsLoaded
             ? this.state.usersLoaded
                 ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} />
