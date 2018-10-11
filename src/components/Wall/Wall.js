@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Status from "./Status.js";
-import CreateStatus from "./CreateStatus.js";
 import './Wall.css';
 
 const API = 'http://localhost:4000/api/statuses';
@@ -62,18 +60,29 @@ class Wall extends Component {
 
   render() {
     const list = this.state.matchedStatus.map(data =>
-      <div key={data._id} className="statusContainer">
-        <div className="userInfoCard">
-          <img className="userImage" src={data.image} />
-          <div className="userNameTime">
-            <h4>{data.name}</h4>
-            <p>{data.time}</p>
-          </div>
+        <div key={data._id} className="statusContainer">
+            <div className="userInfoCard">
+                <div className="imageHeader">
+                    <img className="userImage" src={data.image} alt="avatar"/>
+                    <div className="userNameTime">
+                        <h4>{data.name}</h4>
+                        <p>{data.time}</p>
+                    </div>
+                </div>
+                <div className="info">
+                    <button className="infoDots">...</button>
+                    <div className="options hidden">
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div className="statusText">
+                <p>
+                    {data.text}
+                </p>
+            </div>
         </div>
-        <div className="statusText">
-          <p>{data.text}</p>
-        </div>
-      </div>
     );
     return (
         <div className="wallContainer">
