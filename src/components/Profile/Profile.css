@@ -87,6 +87,7 @@ body{
 .sugFriendStl > p {
   font-size: 0.8em;
   color: #5d5d5d;
+  padding: 12px 0px 0px 7px;
 }
 
 .SugParagrafText{
@@ -97,6 +98,12 @@ body{
 .SugParagrafText > p {
   margin: 0;
   color: #5972a7;
+}
+
+.SugParagrafText > img{
+  padding: 5px 0px 0px 5px;
+  height: 12px;
+  cursor: pointer;
 }
 .sugInnerFriendContainer{
   margin: 10px 0 0 5px;
