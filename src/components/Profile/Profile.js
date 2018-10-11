@@ -25,6 +25,7 @@ class Profile extends Component {
         <p>{data.first_name}</p>
         <p>{data.last_name}</p>
       </div>
+
   )
 
     return (

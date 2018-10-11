@@ -31,7 +31,6 @@ const statuses = {
                 resolve(res)
             })
         });
-
       });
     },
     get: function(req) {
