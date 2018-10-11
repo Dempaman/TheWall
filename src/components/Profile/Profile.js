@@ -8,27 +8,24 @@ class Profile extends Component {
     super(props);
     this.state = {
         user: this.props.user,
+        users: [],
         show: false
     }
-  }
-
-  toggleDiv() {
-    this.setState({ show: !this.state.show })
   }
 
   findFunction(){
     var friendList= []
     for(let i = 0; i < 3; i++){
-      const result = this.props.apiData.find( friend => friend._id === this.props.randomProfile.friends[i] );
+      const result = this.props.users.find( friend => friend._id === this.props.user.friends[i] );
       friendList.push(result)
     }
-    this.setState({onlineFriends: friendList})
+    this.setState({users: friendList})
     this.setState({ show: !this.state.show })
   }
 
   render() {
 
-  const list = this.state.onlineFriends.map(data =>
+  const list = this.state.users.map(data =>
       <div className="sugFriendStl"  key={data._id}>
         <img className="sugProfileImg" src={data.url} alt="Profile" />
         <p>{data.first_name}</p>
@@ -36,6 +33,7 @@ class Profile extends Component {
       </div>
     )
 
+    console.log(this.state.users);
     return (
       <div className="mainProfileContainer">
         <div>

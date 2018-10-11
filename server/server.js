@@ -64,11 +64,15 @@ app.put("/api/status", (req, res) => {
 })
 
 app.delete("/api/user/:id", (req, res) => {
-    res.send(users.remove(req))
+    users.remove(req.params.id, function(removeById) {
+        res.send(removeById)
+    })
 })
 
 app.delete("/api/status/:id", (req, res) => {
-    res.send(statuses.remove(req))
+    statuses.remove(req.params.id, function(removeById) {
+        res.send(removeById)
+    })
 })
 
 app.get("/api/groups", (req, res) => {

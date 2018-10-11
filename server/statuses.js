@@ -70,32 +70,29 @@ const statuses = {
 
 
     },
-    remove: function(req) {
+    remove: function(id, callback) {
         let res;
 
-        let statusId = req.params.id
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
-                return error(err.message)
+                callback(error(err.message))
             }
 
             const db = client.db("theWall")
             const collection = db.collection("statuses")
 
             try {
-                collection.deleteOne(ObjectId(statusId))
+                collection.deleteOne(ObjectId(id))
 
                 client.close()
-                res = { msg: "Succesfully deleted status with id", statusId }
+                callback({ msg: "Succesfully deleted status with id", id })
             }
             catch(err) {
                 client.close()
-                res = error(err.message)
+                callback(error(err.message))
             }
         })
-
-        return res
     }
 }
 
