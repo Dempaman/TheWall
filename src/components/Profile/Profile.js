@@ -8,6 +8,7 @@ class Profile extends Component {
     super(props);
     this.state = {
         user: this.props.user,
+        users: this.props.users,
         show: false
     }
   }
@@ -19,7 +20,7 @@ class Profile extends Component {
   findFunction(){
     var friendList= []
     for(let i = 0; i < 3; i++){
-      const result = this.props.apiData.find( friend => friend._id === this.props.randomProfile.friends[i] );
+      const result = this.props.users.find( friend => friend._id === this.props.user[i] );
       friendList.push(result)
     }
     this.setState({onlineFriends: friendList})
@@ -27,15 +28,15 @@ class Profile extends Component {
   }
 
   render() {
-
-  const list = this.state.onlineFriends.map(data =>
+  /*
+  const list = this.props.users.map(data =>
       <div className="sugFriendStl"  key={data._id}>
         <img className="sugProfileImg" src={data.url} alt="Profile" />
         <p>{data.first_name}</p>
         <p>{data.last_name}</p>
       </div>
     )
-
+    */
     return (
       <div className="mainProfileContainer">
         <div>
@@ -55,7 +56,7 @@ class Profile extends Component {
               <img onClick={() => this.findFunction()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
             </div>
             <div className="sugInnerFriendContainer">
-              {this.state.show ? <div>{list}</div> :false}
+              {this.state.show ? <div>list</div> :false}
             </div>
           </div>
         </div>
