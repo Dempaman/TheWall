@@ -66,7 +66,8 @@ class App extends Component {
             ? this.state.usersLoaded 
                 ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} /> 
                 : null 
-            : null }
+            : null 
+          }
         </div>
       </div>
     );
