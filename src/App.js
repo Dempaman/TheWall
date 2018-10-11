@@ -32,6 +32,8 @@ class App extends Component {
     )
   }
 
+
+
   render() {
     return (
       <div className="app">
@@ -41,7 +43,8 @@ class App extends Component {
             apiData={this.state.apiData}
             randomProfile={this.state.randomProfile}
           />
-          <Wall />
+
+          {this.state.apiData.length > 0 ? <Wall usersId={this.state.apiData}/> : null}
           <SidebarRight />
         </div>
       </div>

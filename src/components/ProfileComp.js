@@ -11,6 +11,7 @@ class ProfileComp extends Component {
     this.state = {
       apiData: [],
       randomProfile: [],
+      apiStatusData: []
     }
   }
 
