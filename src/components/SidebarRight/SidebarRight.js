@@ -7,8 +7,8 @@ class SidebarRight extends Component {
     render() {
         return (
             <div className="SidebarRight">
-                <Users />
-                <Groups />
+                <Users users={this.props.users} />
+                <Groups refreshGroups={this.props.refreshGroups} groups={this.props.groups} user={this.props.user} />
             </div>
         )
     }
