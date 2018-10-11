@@ -32,8 +32,7 @@ class Profile extends Component {
         <p>{data.last_name}</p>
       </div>
     )
-
-    console.log(this.state.users);
+    
     return (
       <div className="mainProfileContainer">
         <div>
