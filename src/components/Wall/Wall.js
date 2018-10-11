@@ -26,18 +26,22 @@ class Wall extends Component {
   matchStatusUser(){
     let statusList = [];
     let usersId = this.props.usersId;
-    for(let i = 0; i < this.state.apiStatus.length; i++){
-      if(this.state.apiStatus[i].author === usersId[i]._id){
-        let statusObj = {
-          name: `${usersId[i].first_name} ${usersId[i].last_name}`,
-          email: usersId[i].email,
-          text: this.state.apiStatus[i].text,
-          time: this.state.apiStatus[i].timestamp,
-          author: this.state.apiStatus[i].author,
-          _id: this.state.apiStatus[i]._id,
-          image: usersId[i].url
+    let status = this.state.apiStatus;
+
+    for (let i = 0; i < usersId.length; i++ ) {
+      for ( let e = 0; e < status.length; e++ ) {
+        if ( usersId[i]._id === status[e].author ){
+          let statusObj = {
+            name: `${usersId[i].first_name} ${usersId[i].last_name}`,
+            email: usersId[i].email,
+            text: status[e].text,
+            time: status[e].timestamp,
+            author: status[e].author,
+            _id: status[e]._id,
+            image: usersId[i].url
+          }
+          statusList.push(statusObj);
         }
-        statusList.push(statusObj);
       }
     }
     this.setState({matchedStatus: statusList})
@@ -50,7 +54,7 @@ class Wall extends Component {
     .then(data => this.setState({
         apiStatus: data
     }, () => {
-        this.matchStatusUser();
+      this.matchStatusUser();
     })
     )
   }
@@ -78,7 +82,7 @@ class Wall extends Component {
             <textarea className="textAreaStatus" placeholder="What's up?"/>
             <div className="postButtonContainer">
               <button className="settingsButton">Settings</button>
-              <button className="postButton" onClick={this.matchStatusUser}>Post</button>
+              <button className="postButton">Post</button>
             </div>
           </div>
           {list}

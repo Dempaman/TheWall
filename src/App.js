@@ -63,7 +63,8 @@ class App extends Component {
         <Header />
         <div className="mainCompContainer">
           <Profile user={this.state.user} />
-          {this.state.users.length > 0 ? <Wall usersId={this.state.apiData}/> : null}
+          {this.state.users.length > 0 ? <Wall usersId={this.state.users}/> : null}
+
           { this.state.groupsLoaded
             ? this.state.usersLoaded
                 ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} />
