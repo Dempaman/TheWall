@@ -18,15 +18,21 @@ class Profile extends Component {
   }
 
   render() {
+      const isUserFriends = this.props.userFriends
+      let list;
 
-  const list = this.props.userFriends.map(data =>
-      <div className="sugFriendStl"  key={data._id}>
-        <img className="sugProfileImg" src={data.url} alt="Profile" />
-        <p>{data.first_name}</p>
-        <p>{data.last_name}</p>
-      </div>
-
-  )
+      if(!isUserFriends){
+          list = <div>loading friends..</div>
+      } else {
+          list =
+          this.props.userFriends.map(data =>
+              <div className="sugFriendStl"  key={data._id}>
+                  <img className="sugProfileImg" src={data.url} alt="Profile" />
+                  <p>{data.first_name}</p>
+                  <p>{data.last_name}</p>
+              </div>
+          )
+      }
 
     return (
       <div className="mainProfileContainer">
