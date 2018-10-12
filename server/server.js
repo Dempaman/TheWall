@@ -58,8 +58,8 @@ app.put("/api/user/", (req, res) => {
 })
 
 app.put("/api/status", (req, res) => {
-    statuses.createOrUpdate(req).then(data=>{
-      res.send(data)
+    statuses.createOrUpdate(req, function(data) {
+        res.send(data)
     })
 })
 

@@ -131,8 +131,8 @@ textarea::placeholder {
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    top: 0;
-    left: -3em;
+    top: 0em;
+    left: -2em;
     background: white;
     border-radius: 5px;
     -webkit-box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
@@ -165,6 +165,14 @@ textarea::placeholder {
 .userInfoCard .info .infoDots:hover {
     cursor: pointer;
     color: #3d5c99;
+}
+
+.userInfoCard .info > div {
+    display: none;
+}
+
+.userInfoCard .info:hover > div {
+    display: block;
 }
 
 .userImage{
