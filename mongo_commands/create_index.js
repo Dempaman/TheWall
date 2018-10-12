@@ -10,7 +10,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
 	const db = client.db('theWall');
 	const collection = db.collection('statuses');
 	console.log(`Connecting to statuses...`);
-		collection.createIndex( { timestamp: 1 }, function(err, result) {
+		collection.createIndex( { timestamp: -1 }, function(err, result) {
 			if( err ) {
 				console.log('Failed to create index. ', err);
 				client.close();

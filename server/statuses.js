@@ -20,7 +20,7 @@ const statuses = {
             const db = client.db("theWall")
             const collection = db.collection("statuses")
 
-            collection.aggregate([{ $sort : { timestamp : 1} }, { $limit : 30 } ] ).toArray((err, docs) => {
+            collection.aggregate([{ $sort : { timestamp : -1} }, { $limit : 30 } ] ).toArray((err, docs) => {
                 client.close()
                 if(err) {
                     console.log(err)
