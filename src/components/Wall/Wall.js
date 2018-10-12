@@ -51,7 +51,6 @@ class Wall extends Component {
                         _id: statuses[e]._id,
                         image: users[i].url
                     }
-
                     statusList.push(status);
                 }
             }
@@ -97,7 +96,7 @@ class Wall extends Component {
     handleInputChange = event => {
         this.setState({ text: event.target.value })
     }
-    
+
     handleTextAreaChange = event => {
         this.setState({ textArea: event.target.value})
     }
@@ -155,13 +154,13 @@ class Wall extends Component {
                     </div>
                 </div>
                 <div className="statusText">
-                    { this.state.editStatus === data._id && this.state.edit 
+                    { this.state.editStatus === data._id && this.state.edit
                         ?   <React.Fragment>
                                 <input type="text" value={this.state.text} onChange={this.handleInputChange} />
                                 <button onClick={() => this.commitChange(data)}>Save</button>
                                 <button onClick={this.disableEdit}>Discard</button>
-                            </React.Fragment> 
-                        : <p>{data.text}</p> 
+                            </React.Fragment>
+                        : <p>{data.text}</p>
                     }
                 </div>
             </div>
