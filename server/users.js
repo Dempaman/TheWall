@@ -92,13 +92,13 @@ const users = {
             const db = client.db("theWall")
             const collection = db.collection("users")
 
-            try {
-                collection.deleteOne(ObjectId(id))
-                callback({ msg: "Succesfully deleted user with id", id })
-            }
-            catch(err) {
-                callback(error(err.message))
-            }
+            collection.deleteOne({ "_id": ObjectId(id)}, (err) => {
+                if(err) {
+                    callback(error(err.message))
+                }
+
+                callback({ msg: "Succesfully deleted status with id " + id })
+            })
 
             client.close()
         })

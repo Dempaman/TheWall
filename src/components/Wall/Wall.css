@@ -201,6 +201,7 @@ textarea::placeholder {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
+  border-bottom: 0.5px solid lightgray;
 }
 
 .statusText p{
@@ -210,5 +211,12 @@ textarea::placeholder {
   font-family: 'Montserrat', sans-serif;
   color: #2f2f2f;
   padding-bottom: 10px;
-  border-bottom: 0.5px solid lightgray;
+}
+
+.statusText input {
+    margin: 10px 20px;
+    font-size: 14px;
+    color: #2f2f2f;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid lightgray;
 }

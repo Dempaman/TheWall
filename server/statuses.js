@@ -79,13 +79,13 @@ const statuses = {
             const db = client.db("theWall")
             const collection = db.collection("statuses")
 
-            try {
-                collection.deleteOne(ObjectId(id))
+            collection.deleteOne({ "_id": ObjectId(id)}, (err) => {
+                if(err) {
+                    callback(error(err.message))
+                }
+
                 callback({ msg: "Succesfully deleted status with id " + id })
-            }
-            catch(err) {
-                callback(error(err.message))
-            }
+            })
 
             client.close()
         })

@@ -51,7 +51,7 @@ app.get("/api/status/:id", (req, res) => {
     res.send(statuses.get(req))
 })
 
-app.post("/api/user/", (req, res) => {
+app.put("/api/user/", (req, res) => {
     users.createOrUpdate(req).then((data)=>{
       res.send(data)
     })
