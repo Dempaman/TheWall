@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const path = require("path")
+var bodyParser = require('body-parser');
 
 const users = require("./users.js")
 const statuses = require("./statuses.js")
@@ -24,8 +25,14 @@ const API_DESC = `
     DELETE /api/users/:id           - Delete user by id
     DELETE /api/status/:id          - Delete status by id`
 
+const Client = require("mongodb").MongoClient
+const ObjectId = require('mongodb').ObjectId
+const url = "mongodb://127.0.0.1:27017"
+
 app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'build/')))
+app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api", (req, res) => {
     res.send(API_DESC)
@@ -58,9 +65,7 @@ app.post("/api/user/", (req, res) => {
 })
 
 app.put("/api/status", (req, res) => {
-    statuses.createOrUpdate(req).then(data=>{
-      res.send(data)
-    })
+  res.send(JSON.stringify(req.body))
 })
 
 app.delete("/api/user/:id", (req, res) => {

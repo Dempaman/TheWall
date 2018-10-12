@@ -4,6 +4,7 @@ import CreateStatus from "./CreateStatus.js";
 import './Wall.css';
 
 const API = 'http://localhost:4000/api/statuses';
+const apiStatusEndpoint = "http://localhost:4000/api/status"
 
 
 class Wall extends Component {
@@ -12,12 +13,17 @@ class Wall extends Component {
 
     this.state={
       apiStatus: [],
-      matchedStatus: []
+      matchedStatus: [],
+      test: {
+          text: 'TEST',
+          author: "5bbf5bd95ad147144c390a68",
+          timestamp: 'timestamp',
+          likes: [],
+          comments: [],
+      }
     }
     this.matchStatusUser = this.matchStatusUser.bind(this);
   }
-
-
 
   componentDidMount() {
     this.fetchStatus();
@@ -44,9 +50,12 @@ class Wall extends Component {
         }
       }
     }
+    //Sorterar statuses på frontend i fallande ordning på tid
+    statusList.sort(function(a,b){
+        return new Date(b.time) - new Date(a.time);
+    });
     this.setState({matchedStatus: statusList})
   }
-
 
   fetchStatus(){
     fetch(API)
@@ -59,8 +68,28 @@ class Wall extends Component {
     )
   }
 
+    putStatus(x){
+        fetch(apiStatusEndpoint, {
+            method: 'PUT',
+            body: JSON.stringify({
+                text: 'TEST',
+                author: "5bbf5bd95ad147144c390a68",
+                timestamp: 'timestamp',
+                likes: [],
+                comments: [],
+            }),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+        }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));
+    }
+
 
   render() {
+    console.log(this.state.matchedStatus);
     const list = this.state.matchedStatus.map(data =>
       <div key={data._id} className="statusContainer">
         <div className="userInfoCard">
@@ -82,7 +111,7 @@ class Wall extends Component {
             <textarea className="textAreaStatus" placeholder="What's up?"/>
             <div className="postButtonContainer">
               <button className="settingsButton">Settings</button>
-              <button className="postButton">Post</button>
+              <button onClick={() => this.putStatus()} className="postButton">Post</button>
             </div>
           </div>
           {list}

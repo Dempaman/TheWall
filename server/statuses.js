@@ -19,8 +19,8 @@ const statuses = {
 
             const db = client.db("theWall")
             const collection = db.collection("statuses")
-
-            collection.find({}).toArray((err, docs) => {
+            //db.statuses.aggregate([{ $sort : { timestamp : 1} }, { $limit : 10 } ] )
+            collection.aggregate([{ $sort : { timestamp : 1} }, { $limit : 30 } ] ).toArray((err, docs) => {
                 client.close()
                 if(err) {
                     console.log(err)
@@ -29,6 +29,7 @@ const statuses = {
                 }
                 res = docs
                 resolve(res)
+                console.log(res);
             })
         });
       });
@@ -42,7 +43,7 @@ const statuses = {
       const status_data = req.body
 
       return new Promise((resolve, reject)=>{
-        let query;
+        let res, query;
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -50,14 +51,15 @@ const statuses = {
             }
             const db = client.db("theWall")
             const collection = db.collection("statuses")
-            if (status_data._id){
-                query = {_id: ObjectId(status_data._id)};
-            }else{
-                query = {};
-            }
 
-            collection.updateOne(query, {
-              $set: {text: status_data.text, author: status_data.author, timestamp: status_data.timestamp, likes: status_data.likes, comments: status_data.comments}
+            collection.updateOne({
+              $set: {
+                  text: status_data.text,
+                  author: status_data.author,
+                  timestamp: status_data.timestamp,
+                  likes: status_data.likes,
+                  comments: status_data.comments
+              }
             }, { upsert: true }, function(res, err){
               console.log(res)
               console.log(err)
@@ -70,6 +72,8 @@ const statuses = {
 
     },
     remove: function(id, callback) {
+        let res;
+
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -81,13 +85,14 @@ const statuses = {
 
             try {
                 collection.deleteOne(ObjectId(id))
+
+                client.close()
                 callback({ msg: "Succesfully deleted status with id", id })
             }
             catch(err) {
+                client.close()
                 callback(error(err.message))
             }
-
-            client.close()
         })
     }
 }
