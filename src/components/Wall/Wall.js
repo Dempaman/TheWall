@@ -10,7 +10,9 @@ class Wall extends Component {
 
     this.state={
       apiStatus: [],
-      matchedStatus: []
+      matchedStatus: [],
+      editStatus: 0,
+      edit: false
     }
     this.matchStatusUser = this.matchStatusUser.bind(this);
   }
@@ -57,6 +59,18 @@ class Wall extends Component {
     )
   }
 
+    toggleEdit = data => {
+        this.setState({ editStatus: data._id, edit: !this.state.edit })
+    }
+
+    deleteStatus = data => {
+        fetch("http://localhost:4000/api/status/" + data._id, { method: "DELETE" })
+        .then(res => res.json())
+        .then(data => {
+            this.fetchStatus()
+            console.log(data)
+        })
+    }
 
   render() {
     const list = this.state.matchedStatus.map(data =>
@@ -71,13 +85,14 @@ class Wall extends Component {
                 </div>
                 <div className="info">
                     <button className="infoDots">...</button>
-                    <div className="options hidden">
-                        <button>Edit</button>
-                        <button>Delete</button>
+                    <div className="options">
+                        <button onClick={() => this.toggleEdit(data)} >Edit</button>
+                        <button onClick={() => this.deleteStatus(data)} >Delete</button>
                     </div>
                 </div>
             </div>
             <div className="statusText">
+                { this.state.editStatus === data._id && this.state.edit ? <p>Hello</p> : null }
                 <p>
                     {data.text}
                 </p>
