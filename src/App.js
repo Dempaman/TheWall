@@ -7,7 +7,6 @@ import Header from './components/Header.js';
 
 const apiUsersEndpoint = 'http://localhost:4000/api/users'
 const apiGroupsEndpoint = "http://localhost:4000/api/groups"
-const apiStatusesEndpoint = "http://localhost:4000/api/statuses"
 
 class App extends Component {
   constructor(props){
@@ -15,7 +14,6 @@ class App extends Component {
     this.state = {
         users: [],
         groups: [],
-        statuses: [],
         user: {},
         userFriends: [],
         usersLoaded: false,
@@ -25,7 +23,6 @@ class App extends Component {
 
     componentDidMount() {
         this.fetchUsers()
-        this.fetchStatuses()
         this.fetchGroups()
     }
 
@@ -33,11 +30,11 @@ class App extends Component {
         fetch(apiUsersEndpoint)
         .then(response => response.json())
         .then(data => this.setState({
-                users: data,
-                user: data[Math.floor(Math.random() * data.length)],
-                usersLoaded: true
-            }, () => {
-              this.findFriends()
+            users: data,
+            user: data[Math.floor(Math.random() * data.length)],
+            usersLoaded: true
+        }, () => {
+                this.findFriends()
             })
         )
     }
@@ -48,21 +45,15 @@ class App extends Component {
         .then(data => this.setState({ groups: data, groupsLoaded: true }))
     }
 
-    fetchStatuses = () => {
-        fetch(apiStatusesEndpoint)
-        .then(res => res.json())
-        .then(data => this.setState({ statuses: data }))
-    }
-
     refreshGroups = () => {
         this.fetchGroups()
     }
 
     findFriends(){
-        var friendList= []
+        var friendList = []
 
         for(let i = 0; i < 3; i++){
-            const result = this.state.users.find( friend => friend._id === this.state.user.friends[i] );
+            let result = this.state.users.find( friend => friend._id === this.state.user.friends[i] );
             friendList.push(result)
         }
 
@@ -74,13 +65,12 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} />
-          {this.state.users.length > 0 ? <Wall usersId={this.state.users}/> : null}
-          { this.state.groupsLoaded
-            ? this.state.usersLoaded
+            { this.state.usersLoaded ? <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} /> : null }
+            { this.state.usersLoaded ? <Wall users={this.state.users}/> : null}
+            { this.state.groupsLoaded && this.state.usersLoaded
                 ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} />
                 : null
-            : null }
+            }
         </div>
       </div>
     );
