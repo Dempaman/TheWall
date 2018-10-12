@@ -56,7 +56,7 @@ class App extends Component {
             let result = this.state.users.find( friend => friend._id === this.state.user.friends[i] );
             friendList.push(result)
         }
-        
+
         this.setState({userFriends: friendList})
     }
 
