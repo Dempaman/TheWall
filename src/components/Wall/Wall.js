@@ -9,11 +9,20 @@ class Wall extends Component {
         super(props);
 
         this.state={
+            user: this.props.user,
             apiStatus: [],
             matchedStatus: [],
             editStatus: 0,
             edit: false,
-            text: ""
+            text: "",
+            textArea: "",
+            test: {
+                text: 'TEST',
+                author: "5bbf5bd95ad147144c390a68",
+                timestamp: 'timestamp',
+                likes: [],
+                comments: [],
+            }
         }
     }
 
@@ -48,6 +57,11 @@ class Wall extends Component {
             }
         }
 
+        //Sorterar statuses på frontend i fallande ordning på tid
+        statusList.sort(function(a,b){
+            return new Date(b.time) - new Date(a.time);
+        });
+
         this.setState({matchedStatus: statusList})
     }
 
@@ -58,8 +72,8 @@ class Wall extends Component {
         .then(data => this.setState({
             apiStatus: data
         }, () => {
-            this.matchStatusUser();
-        })
+                this.matchStatusUser();
+            })
         )
     }
 
@@ -80,14 +94,45 @@ class Wall extends Component {
         })
     }
 
-    handleChange = event => {
-        this.setState({ text: event.target.value }, () => console.log(this.state.text))
+    handleInputChange = event => {
+        this.setState({ text: event.target.value })
+    }
+    
+    handleTextAreaChange = event => {
+        this.setState({ textArea: event.target.value})
     }
 
     commitChange = data => {
         let newData = { ...data, text: this.state.text }
 
         //fetch(API,)
+    }
+
+    putStatus = () => {
+        fetch("http://localhost:4000/api/status?text=" + this.state.textArea + "&author=" + this.state.user._id, { method: "PUT" })
+        .then(res => res.json())
+        .then( data => {
+            this.fetchStatuses()
+            console.log(data)
+        })
+
+        /*fetch("http://localhost:4000/api/status", {
+            method: 'PUT',
+            body: JSON.stringify({
+                text: 'TEST',
+                author: "5bbf5bd95ad147144c390a68",
+                timestamp: 'timestamp',
+                likes: [],
+                comments: [],
+            }),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error));*/
     }
 
     render() {
@@ -112,7 +157,7 @@ class Wall extends Component {
                 <div className="statusText">
                     { this.state.editStatus === data._id && this.state.edit 
                         ?   <React.Fragment>
-                                <input type="text" value={this.state.text} onChange={this.handleChange} />
+                                <input type="text" value={this.state.text} onChange={this.handleInputChange} />
                                 <button onClick={() => this.commitChange(data)}>Save</button>
                                 <button onClick={this.disableEdit}>Discard</button>
                             </React.Fragment> 
@@ -125,10 +170,10 @@ class Wall extends Component {
             <div className="wallContainer">
                 <div className="createStatusContainer">
                 <div className="optionCreate"><p>Status</p></div>
-                <textarea className="textAreaStatus" placeholder="What's up?"/>
+                <textarea className="textAreaStatus" placeholder="What's up?" value={this.state.textArea} onChange={this.handleTextAreaChange} />
                 <div className="postButtonContainer">
                     <button className="settingsButton">Settings</button>
-                    <button className="postButton">Post</button>
+                    <button onClick={this.putStatus} className="postButton">Post</button>
                 </div>
                 </div>
                 {list}
