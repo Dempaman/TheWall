@@ -16,13 +16,6 @@ class Wall extends Component {
             edit: false,
             text: "",
             textArea: "",
-            test: {
-                text: 'TEST',
-                author: "5bbf5bd95ad147144c390a68",
-                timestamp: 'timestamp',
-                likes: [],
-                comments: [],
-            }
         }
     }
 
@@ -42,26 +35,59 @@ class Wall extends Component {
                 // If the user is the author of a status
                 if (users[i]._id === statuses[e].author){
                     // Add User name + Lastname + Email + Avatar etc to the status
+
+                    let convTime = Date.parse(statuses[e].timestamp) //Converts the timesamp in statuses to "unix timestamp"
+                    let compare = new Date(Date.now()- convTime) //Compares the time when it was posted with todays date/time
+
                     let status = {
                         name: `${users[i].first_name} ${users[i].last_name}`,
                         email: users[i].email,
                         text: statuses[e].text,
                         time: statuses[e].timestamp,
                         author: statuses[e].author,
+                        timeAgo: timeSince(new Date(Date.now() - compare)),
                         _id: statuses[e]._id,
                         image: users[i].url
+                    }
+                    //Func that tells how long ago status was posted
+                    function timeSince(date) {
+
+                      var seconds = Math.floor((new Date() - date) / 1000);
+
+                      var interval = Math.floor(seconds / 31536000);
+
+                      if (interval >= 1) {
+                        return interval + " years ago";
+                      }
+                      interval = Math.floor(seconds / 2592000);
+                      if (interval >= 1) {
+                        return interval + " months ago";
+                      }
+                      interval = Math.floor(seconds / 86400);
+                      if (interval >= 1) {
+                        return interval + " days ago";
+                      }
+                      interval = Math.floor(seconds / 3600);
+                      if (interval >= 1) {
+                        return interval + " h ago";
+                      }
+                      interval = Math.floor(seconds / 60);
+                      if (interval >= 1) {
+                        return interval + " min ago";
+                      }
+                      return " just now";
                     }
                     statusList.push(status);
                 }
             }
         }
-
-        //Sorterar statuses på frontend i fallande ordning på tid
-        statusList.sort(function(a,b){
-            return new Date(b.time) - new Date(a.time);
-        });
-
-        this.setState({matchedStatus: statusList})
+        this.setState(
+            {
+                matchedStatus: statusList.sort(function(a,b){
+                    return new Date(b.time) - new Date(a.time);
+                })
+            }
+        )
     }
 
 
@@ -135,6 +161,7 @@ class Wall extends Component {
     }
 
     render() {
+        console.log(this.state.matchedStatus);
         const list = this.state.matchedStatus.map(data =>
             <div key={data._id} className="statusContainer">
                 <div className="userInfoCard">
@@ -142,7 +169,7 @@ class Wall extends Component {
                         <img className="userImage" src={data.image} alt="avatar"/>
                         <div className="userNameTime">
                             <h4>{data.name}</h4>
-                            <p>{data.time}</p>
+                            <p>{data.timeAgo}</p>
                         </div>
                     </div>
                     <div className="info">
