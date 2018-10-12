@@ -19,6 +19,7 @@ const statuses = {
 
             const db = client.db("theWall")
             const collection = db.collection("statuses")
+
             collection.aggregate([{ $sort : { timestamp : 1} }, { $limit : 30 } ] ).toArray((err, docs) => {
                 client.close()
                 if(err) {
@@ -28,7 +29,6 @@ const statuses = {
                 }
                 res = docs
                 resolve(res)
-                console.log(res);
             })
         });
       });
@@ -37,48 +37,78 @@ const statuses = {
         let statusId = req.params.id
         return "You got me!"
     },
-    createOrUpdate: function(req) {
+    createOrUpdate: function(req, callback) {
 
-      const status_data = req
+        let status = {
+            _id: req.query._id || null,
+            text: req.query.text,
+            author: req.query.author,
+            timestamp: req.query.timestamp || new Date(),
+            likes: req.query.likes || [],
+            comments: req.query.comments || []
+        }
 
-      return new Promise((resolve, reject)=>{
-        let res, query;
+        let query;
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
-                console.log(err)
-                return error(err.message)
+                callback(error(err.message))
+                client.close()
+                return true
             }
+
             const db = client.db("theWall")
             const collection = db.collection("statuses")
-            if (status_data._id){
-                query = {_id: ObjectId(status_data._id)};
-            }else{
-                query = { _id: ObjectId(0)};
+
+            if (status._id) {
+                query = { _id: ObjectId(status._id) };
+            } else {
+                query = { _id: ObjectId(0) };
             }
 
             collection.updateOne(query, {
-                $set:
-                {
-                    text: status_data.text,
-                    author: status_data.author,
-                    timestamp: status_data.timestamp,
-                    likes: status_data.likes,
-                    comments: status_data.comments
+                $set: { text: status.text, author: status.author, timestamp: status.timestamp, likes: status.likes, comments: status.comments }
+            }, { upsert: true }, function(err, res) {
+                if(err) {
+                    callback(error(err.message))
+                    client.close()
+                    return true
                 }
-            }, { upsert: true }, function(err, res){
-                console.log(res)
-                console.log(err)
-              resolve(JSON.stringify(res))
+
+                callback(res)
+                client.close()
             })
         })
-      });
 
+        /*return new Promise((resolve, reject)=>{
+            let query;
+            Client.connect(url, { useNewUrlParser: true }, (err, client) => {
+                if(err) {
+                    console.log(err)
+                    return error(err.message)
+                }
 
+                const db = client.db("theWall")
+                const collection = db.collection("statuses")
 
+                if (status._id) {
+                    query = {_id: ObjectId(status._id)};
+                } else {
+                    query = {};
+                }
+
+                console.log(query)
+
+                collection.updateOne(query, {
+                    $set: {text: status.text, author: status.author, timestamp: status.timestamp, likes: status.likes, comments: status.comments}
+                }, { upsert: true }, function(res, err) {
+                    console.log(res)
+                    console.log(err)
+                    resolve(res)
+                })
+            })
+        });*/
     },
     remove: function(id, callback) {
-        let res;
-
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
@@ -88,14 +118,15 @@ const statuses = {
             const db = client.db("theWall")
             const collection = db.collection("statuses")
 
-            try {
-                collection.deleteOne(ObjectId(id))
+            collection.deleteOne({ "_id": ObjectId(id)}, (err) => {
+                if(err) {
+                    callback(error(err.message))
+                }
+
                 callback({ msg: "Succesfully deleted status with id " + id })
-            }
-            catch(err) {
-                client.close()
-                callback(error(err.message))
-            }
+            })
+
+            client.close()
         })
     }
 }
