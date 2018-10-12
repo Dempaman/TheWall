@@ -60,11 +60,13 @@ class App extends Component {
 
     findFriends(){
         var friendList= []
+
         for(let i = 0; i < 3; i++){
             const result = this.state.users.find( friend => friend._id === this.state.user.friends[i] );
             friendList.push(result)
         }
-            this.setState({userFriends: friendList})
+
+        this.setState({userFriends: friendList})
     }
 
   render() {
@@ -72,7 +74,7 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-          {this.state.users.length > 0 ? <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends}/> : null}
+          <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} />
           {this.state.users.length > 0 ? <Wall usersId={this.state.users}/> : null}
           { this.state.groupsLoaded
             ? this.state.usersLoaded

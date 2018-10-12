@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Status from "./Status.js";
-import CreateStatus from "./CreateStatus.js";
 import './Wall.css';
 
 const API = 'http://localhost:4000/api/statuses';
@@ -14,6 +12,8 @@ class Wall extends Component {
     this.state={
       apiStatus: [],
       matchedStatus: [],
+      editStatus: 0,
+      edit: false,
       test: {
           text: 'TEST',
           author: "5bbf5bd95ad147144c390a68",
@@ -68,7 +68,20 @@ class Wall extends Component {
     )
   }
 
-    putStatus(x){
+    toggleEdit = data => {
+        this.setState({ editStatus: data._id, edit: !this.state.edit })
+    }
+
+    deleteStatus = data => {
+        fetch("http://localhost:4000/api/status/" + data._id, { method: "DELETE" })
+        .then(res => res.json())
+        .then(data => {
+            this.fetchStatus()
+            console.log(data)
+        })
+    }
+
+    putStatus(){
         fetch(apiStatusEndpoint, {
             method: 'PUT',
             body: JSON.stringify({
@@ -91,18 +104,30 @@ class Wall extends Component {
   render() {
     console.log(this.state.matchedStatus);
     const list = this.state.matchedStatus.map(data =>
-      <div key={data._id} className="statusContainer">
-        <div className="userInfoCard">
-          <img className="userImage" src={data.image} />
-          <div className="userNameTime">
-            <h4>{data.name}</h4>
-            <p>{data.time}</p>
-          </div>
+        <div key={data._id} className="statusContainer">
+            <div className="userInfoCard">
+                <div className="imageHeader">
+                    <img className="userImage" src={data.image} alt="avatar"/>
+                    <div className="userNameTime">
+                        <h4>{data.name}</h4>
+                        <p>{data.time}</p>
+                    </div>
+                </div>
+                <div className="info">
+                    <button className="infoDots">...</button>
+                    <div className="options">
+                        <button onClick={() => this.toggleEdit(data)} >Edit</button>
+                        <button onClick={() => this.deleteStatus(data)} >Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div className="statusText">
+                { this.state.editStatus === data._id && this.state.edit ? <p>Hello</p> : null }
+                <p>
+                    {data.text}
+                </p>
+            </div>
         </div>
-        <div className="statusText">
-          <p>{data.text}</p>
-        </div>
-      </div>
     );
     return (
         <div className="wallContainer">

@@ -85,9 +85,13 @@ const statuses = {
 
             try {
                 collection.deleteOne(ObjectId(id))
+<<<<<<< HEAD
 
                 client.close()
                 callback({ msg: "Succesfully deleted status with id", id })
+=======
+                callback({ msg: "Succesfully deleted status with id " + id })
+>>>>>>> dc4fd5b262e40f630388c7f5c0688aa157146aa2
             }
             catch(err) {
                 client.close()
