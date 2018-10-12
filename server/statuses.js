@@ -19,7 +19,6 @@ const statuses = {
 
             const db = client.db("theWall")
             const collection = db.collection("statuses")
-            //db.statuses.aggregate([{ $sort : { timestamp : 1} }, { $limit : 10 } ] )
             collection.aggregate([{ $sort : { timestamp : 1} }, { $limit : 30 } ] ).toArray((err, docs) => {
                 client.close()
                 if(err) {
@@ -40,7 +39,7 @@ const statuses = {
     },
     createOrUpdate: function(req) {
 
-      const status_data = req.body
+      const status_data = req
 
       return new Promise((resolve, reject)=>{
         let res, query;
@@ -51,19 +50,25 @@ const statuses = {
             }
             const db = client.db("theWall")
             const collection = db.collection("statuses")
+            if (status_data._id){
+                query = {_id: ObjectId(status_data._id)};
+            }else{
+                query = { _id: ObjectId(0)};
+            }
 
-            collection.updateOne({
-              $set: {
-                  text: status_data.text,
-                  author: status_data.author,
-                  timestamp: status_data.timestamp,
-                  likes: status_data.likes,
-                  comments: status_data.comments
-              }
-            }, { upsert: true }, function(res, err){
-              console.log(res)
-              console.log(err)
-              resolve(res)
+            collection.updateOne(query, {
+                $set:
+                {
+                    text: status_data.text,
+                    author: status_data.author,
+                    timestamp: status_data.timestamp,
+                    likes: status_data.likes,
+                    comments: status_data.comments
+                }
+            }, { upsert: true }, function(err, res){
+                console.log(res)
+                console.log(err)
+              resolve(JSON.stringify(res))
             })
         })
       });
@@ -85,13 +90,7 @@ const statuses = {
 
             try {
                 collection.deleteOne(ObjectId(id))
-<<<<<<< HEAD
-
-                client.close()
-                callback({ msg: "Succesfully deleted status with id", id })
-=======
                 callback({ msg: "Succesfully deleted status with id " + id })
->>>>>>> dc4fd5b262e40f630388c7f5c0688aa157146aa2
             }
             catch(err) {
                 client.close()

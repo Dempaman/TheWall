@@ -85,9 +85,9 @@ class Wall extends Component {
         fetch(apiStatusEndpoint, {
             method: 'PUT',
             body: JSON.stringify({
-                text: 'TEST',
-                author: "5bbf5bd95ad147144c390a68",
-                timestamp: 'timestamp',
+                text: 'test2',
+                author: "5bbf5bd9adasc390a78",
+                timestamp: 'time',
                 likes: [],
                 comments: [],
             }),

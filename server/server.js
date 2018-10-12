@@ -31,8 +31,9 @@ const url = "mongodb://127.0.0.1:27017"
 
 app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'build/')))
+//app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api", (req, res) => {
     res.send(API_DESC)
@@ -65,8 +66,11 @@ app.post("/api/user/", (req, res) => {
 })
 
 app.put("/api/status", (req, res) => {
-  res.send(JSON.stringify(req.body))
+    statuses.createOrUpdate(req.body).then(data=>{
+      res.send(req.body)
+  })
 })
+
 
 app.delete("/api/user/:id", (req, res) => {
     users.remove(req.params.id, function(removeById) {
