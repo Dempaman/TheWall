@@ -63,7 +63,6 @@ class App extends Component {
     }
 
   render() {
-      //console.log('friendlist--> ',this.state.userFriends);
     return (
       <div className="app">
         <Header />
