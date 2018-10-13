@@ -78,11 +78,8 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-<<<<<<< HEAD
             { this.state.usersLoaded && this.state.userFriends.length > 0 ? <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} userGroups={this.state.userGroups}/> : null }
-=======
-            { this.state.usersLoaded && this.state.userFriends.length > 0 ? <Profile user={this.state.user} users={this.state.users} friends={this.state.userFriends} /> : null }
->>>>>>> 564b2383af80a600d8d5e11ae79ecc5ae8e4ee11
+
             { this.state.usersLoaded ? <Wall user={this.state.user} users={this.state.users} /> : null}
             { this.state.groupsLoaded && this.state.usersLoaded
                 ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} />
