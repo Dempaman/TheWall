@@ -16,6 +16,7 @@ class App extends Component {
         groups: [],
         user: {},
         userFriends: [],
+        userGroups: [],
         usersLoaded: false,
         groupsLoaded: false
     }
@@ -42,11 +43,21 @@ class App extends Component {
     fetchGroups = () => {
         fetch(apiGroupsEndpoint)
         .then(res => res.json())
-        .then(data => this.setState({ groups: data, groupsLoaded: true }))
+        .then(data => {
+          this.setState({ groups: data, groupsLoaded: true })
+          this.setState({userGroups: []})
+          for (let i in data){
+            if(data[i].members.indexOf(this.state.user._id) !== -1){
+              this.setState({ userGroups: [...this.state.userGroups, data[i]]})
+              console.log(this.state.userGroups)
+            }
+          }
+        })
     }
 
     refreshGroups = () => {
         this.fetchGroups()
+
     }
 
     findFriends(){
@@ -65,7 +76,7 @@ class App extends Component {
       <div className="app">
         <Header />
         <div className="mainCompContainer">
-            { this.state.usersLoaded && this.state.userFriends.length > 0 ? <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} /> : null }
+            { this.state.usersLoaded && this.state.userFriends.length > 0 ? <Profile user={this.state.user} users={this.state.users} userFriends={this.state.userFriends} userGroups={this.state.userGroups}/> : null }
             { this.state.usersLoaded ? <Wall user={this.state.user} users={this.state.users} /> : null}
             { this.state.groupsLoaded && this.state.usersLoaded
                 ? <SidebarRight refreshGroups={this.refreshGroups} groups={this.state.groups} users={this.state.users} user={this.state.user} />

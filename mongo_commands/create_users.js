@@ -50,7 +50,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
           // shuffle the list with all users ids.
           let shuffled = all_inserted_users.sort(() => .5 - Math.random());
           // decide who many friends this user will have.
-          let nr_of_friends = Math.floor(Math.random() * 10) + 1
+          let nr_of_friends = Math.floor(Math.random() * 10) + 5
           // get that amount of random friends from that shuffled list.
           let selected = shuffled.slice(0,nr_of_friends) ;
 

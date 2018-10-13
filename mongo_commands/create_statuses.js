@@ -36,7 +36,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
       count = 0
       for (i in result){
         // create random nr of statuses
-        r = 1//Math.floor(Math.random() * 20) + 10
+        r = Math.floor(Math.random() * 10) + 5
         count += r
         statuses = []
         // push the amount of statuses to a list.
