@@ -82,11 +82,12 @@
     background: #3d9942;
 }
 
-.onlineGroups .avatar {
+.onlineUsers .avatar {
     width: 30px;
     height: 30px;
     border-radius: 100%;
     margin-right: 10px;
+    object-fit: cover;
 }
 
 .onlineGroups .userCount span {

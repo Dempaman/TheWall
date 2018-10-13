@@ -180,6 +180,7 @@ textarea::placeholder {
   height: 40px;
   width: 40px;
   background-color: lightgray;
+  object-fit: cover;
 }
 
 .userNameTime{
