@@ -138,7 +138,6 @@ class Wall extends Component {
         .then(res => res.json())
         .then( data => {
             this.fetchStatuses()
-            console.log(data)
         })
 
         /*fetch("http://localhost:4000/api/status", {
@@ -161,7 +160,6 @@ class Wall extends Component {
     }
 
     render() {
-
         const list = this.state.matchedStatus.map(data =>
             <div key={data._id} className="statusContainer">
                 <div className="userInfoCard">

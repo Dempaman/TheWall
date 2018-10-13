@@ -7,8 +7,6 @@ class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
-        user: this.props.user,
-        userFriends: this.props.userFriends,
         show: true
     }
   }
@@ -18,21 +16,14 @@ class Profile extends Component {
   }
 
   render() {
-      const isUserFriends = this.props.userFriends
-      let list;
 
-      if(!isUserFriends){
-          list = <div>loading friends..</div>
-      } else {
-          list =
-          this.props.userFriends.map(data =>
+          const list =  this.props.friends.map(data =>
               <div className="sugFriendStl"  key={data._id}>
                   <img className="sugProfileImg" src={data.url} alt="Profile" />
                   <p>{data.first_name}</p>
                   <p>{data.last_name}</p>
               </div>
           )
-      }
 
     return (
       <div className="mainProfileContainer">
@@ -50,6 +41,7 @@ class Profile extends Component {
           <div className="sugFriendContainer">
             <div className="SugParagrafText">
               <p>Online Friends</p>
+              <p>{this.props.name}</p>
               <img onClick={() => this.toggleDiv()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
             </div>
             <div className="sugInnerFriendContainer">
