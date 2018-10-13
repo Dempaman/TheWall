@@ -38,7 +38,6 @@ class Profile extends Component {
                   <p>{data.last_name}</p>
               </div>
           )
-      }
 
       const isUserGroups = this.props.userGroups
       let groupList;
