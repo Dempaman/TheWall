@@ -57,7 +57,6 @@ class App extends Component {
             if (result){
                 friendList.push(result)
             }
-            //console.log('result---> ',result);
         }
         this.setState({userFriends: friendList})
     }
