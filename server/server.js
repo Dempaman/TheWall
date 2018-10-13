@@ -45,8 +45,8 @@ app.get("/api/user/:id", (req, res) => {
     res.send(users.get(req))
 })
 
-app.get("/api/statuses", (req, res) => {
-  statuses.getAll().then((data)=>{
+app.get("/api/statuses/:id", (req, res) => {
+  statuses.getAll(req).then((data)=>{
     res.send(data)
   })
 })
