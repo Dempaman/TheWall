@@ -37,7 +37,8 @@ app.get("/api/users", (req, res) => {
   })
 })
 
-app.get("/api/user/:id", (req, res) => {
+app.get("/api/users/:id", (req, res) => {
+  
     res.send(users.get(req))
 })
 
