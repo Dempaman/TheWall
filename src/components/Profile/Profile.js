@@ -8,31 +8,52 @@ class Profile extends Component {
     super(props);
     this.state = {
         user: this.props.user,
-        users: [],
-        show: false
+        userFriends: this.props.userFriends,
+        userGroups: this.props.userGroups,
+        showFriends: true,
+        showGroups: true,
     }
   }
 
-  findFunction(){
-    var friendList= []
-    for(let i = 0; i < 3; i++){
-      const result = this.props.users.find( friend => friend._id === this.props.user.friends[i] );
-      friendList.push(result)
-    }
-    this.setState({users: friendList})
-    this.setState({ show: !this.state.show })
+  toggleFriendsDiv() {
+    this.setState({ showFriends: !this.state.showFriends })
+  }
+
+  toggleGroupsDiv() {
+    this.setState({ showGroups: !this.state.showGroups })
   }
 
   render() {
+      const isUserFriends = this.props.userFriends
+      let friendList;
 
-  const list = this.state.users.map(data =>
-      <div className="sugFriendStl"  key={data._id}>
-        <img className="sugProfileImg" src={data.url} alt="Profile" />
-        <p>{data.first_name}</p>
-        <p>{data.last_name}</p>
-      </div>
-    )
-    
+      if(!isUserFriends){
+          friendList = <div>loading friends..</div>
+      } else {
+          friendList =
+          this.props.userFriends.map(data =>
+              <div className="sugFriendStl"  key={data._id}>
+                  <img className="sugProfileImg" src={data.url} alt="Profile" />
+                  <p>{data.first_name}</p>
+                  <p>{data.last_name}</p>
+              </div>
+          )
+
+      const isUserGroups = this.props.userGroups
+      let groupList;
+
+      if(!isUserGroups){
+          groupList = <div>loading groups..</div>
+      } else {
+          groupList =
+          this.props.userGroups.map(data =>
+              <div className="sugGroupStl"  key={data._id}>
+                  <h6>{data.name}</h6>
+                  <p>{data.description}</p>
+              </div>
+          )
+      }
+
     return (
       <div className="mainProfileContainer">
         <div>
@@ -49,16 +70,28 @@ class Profile extends Component {
           <div className="sugFriendContainer">
             <div className="SugParagrafText">
               <p>Online Friends</p>
-              <img onClick={() => this.findFunction()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
+              <img onClick={() => this.toggleFriendsDiv()} src={this.state.showFriends ? arrowDown : arrowUp} alt="arrow"/>
             </div>
             <div className="sugInnerFriendContainer">
-              {this.state.show ? <div>{list}</div> :false}
+              {this.state.showFriends ? <div>{friendList}</div> :false}
             </div>
           </div>
+
+          <div className="sugGroupContainer">
+            <div className="SugParagrafText">
+              <p>Your Groups</p>
+              <img onClick={() => this.toggleGroupsDiv()} src={this.state.showGroups ? arrowDown : arrowUp} alt="arrow"/>
+            </div>
+            <div className="sugInnerFriendContainer">
+              {this.state.showGroups ? <div>{groupList}</div> :false}
+            </div>
+          </div>
+
         </div>
       </div>
     );
   }
+}
 }
 
 export default Profile;

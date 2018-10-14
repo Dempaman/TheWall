@@ -77,32 +77,26 @@ const users = {
         })
       });
     },
-    remove: function(req) {
-        let res;
-
-        let statusId = req.params.id
+    remove: function(id, callback) {
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {
             if(err) {
                 console.log(err)
-                return error(err.message)
+                callback(error(err.message))
             }
 
             const db = client.db("theWall")
             const collection = db.collection("users")
 
-            try {
-                collection.deleteOne(ObjectId(statusId))
+            collection.deleteOne({ "_id": ObjectId(id)}, (err) => {
+                if(err) {
+                    callback(error(err.message))
+                }
 
-                client.close()
-                res = { msg: "Succesfully deleted user with id", statusId }
-            }
-            catch(err) {
-                client.close()
-                res = error(err.message)
-            }
+                callback({ msg: "Succesfully deleted status with id " + id })
+            })
+
+            client.close()
         })
-
-        return res
     }
 }
 

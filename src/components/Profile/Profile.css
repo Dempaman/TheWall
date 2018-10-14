@@ -10,17 +10,22 @@ body{
 .profileImg {
   margin: 20px auto;
   border-radius: 50%;
+  height: 82px;
   width: 82px;
+  object-fit: cover;
 }
 
 .sugProfileImg {
   border-radius: 50%;
   height: 42px;
+  width: 42px;
+  object-fit: cover;
 }
 
 .mainProfileContainer {
   width: 300px;
-  height: 700px;
+  height: 800px;
+  padding-bottom: 20px;
   margin: 0;
   border-radius: 5px;
   background: #fff;
@@ -104,6 +109,7 @@ body{
   padding: 5px 0px 0px 5px;
   height: 12px;
   cursor: pointer;
+  object-fit: cover;
 }
 .sugInnerFriendContainer{
   margin: 10px 0 0 5px;
@@ -114,4 +120,31 @@ body{
   justify-content: center;
   flex-direction: column;
   text-align: center;
+}
+
+.sugGroupContainer{
+  font-family: 'Montserrat', sans-serif;
+  margin: 15px 15px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #a9b7d299;
+}
+
+.sugGroupStl {
+  font-size: 0.8em;
+  color: #5d5d5d;
+  padding: 12px 0px 0px 7px;
+}
+
+.sugGroupStl h6{
+  font-size: 14px;
+  font-weight: 600;
+  color: #3d5c99;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.sugGroupStl p{
+  color: #212121;
+  margin-bottom: 5px;
 }

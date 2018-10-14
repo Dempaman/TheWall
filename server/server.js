@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const path = require("path")
+const bodyParser = require('body-parser')
 
 const users = require("./users.js")
 const statuses = require("./statuses.js")
@@ -26,6 +27,9 @@ const API_DESC = `
 
 app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'build/')))
+//app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get("/api", (req, res) => {
     res.send(API_DESC)
@@ -42,8 +46,8 @@ app.get("/api/users/:id", (req, res) => {
     res.send(users.get(req))
 })
 
-app.get("/api/statuses", (req, res) => {
-  statuses.getAll().then((data)=>{
+app.get("/api/statuses/:id", (req, res) => {
+  statuses.getAll(req).then((data)=>{
     res.send(data)
   })
 })
@@ -52,17 +56,18 @@ app.get("/api/status/:id", (req, res) => {
     res.send(statuses.get(req))
 })
 
-app.post("/api/user/", (req, res) => {
+app.put("/api/user/", (req, res) => {
     users.createOrUpdate(req).then((data)=>{
       res.send(data)
     })
 })
 
 app.put("/api/status", (req, res) => {
-    statuses.createOrUpdate(req).then(data=>{
-      res.send(data)
+    statuses.createOrUpdate(req, function(data) {
+        res.send(data)
     })
 })
+
 
 app.delete("/api/user/:id", (req, res) => {
     users.remove(req.params.id, function(removeById) {

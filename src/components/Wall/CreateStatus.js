@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class CreateStatus extends Component {
+    
     render() {
       return (
         <div className="createStatusContainer">
