@@ -41,9 +41,10 @@ app.get("/api/users", (req, res) => {
   })
 })
 
-app.get("/api/users/:id", (req, res) => {
-  
-    res.send(users.get(req))
+app.get("/api/user/:id", (req, res) => {
+    users.get(req.params.id, function(getId) {
+      res.send(getId);
+    })
 })
 
 app.get("/api/statuses/:id", (req, res) => {
@@ -53,7 +54,9 @@ app.get("/api/statuses/:id", (req, res) => {
 })
 
 app.get("/api/status/:id", (req, res) => {
-    res.send(statuses.get(req))
+    statuses.get(req.params.id, function(getId) {
+      res.send(getId);
+    })
 })
 
 app.put("/api/user/", (req, res) => {

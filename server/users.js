@@ -24,10 +24,9 @@ const users = {
         });
       });
     },
-    get: function(req) {
+    get: function(id, callback) {
 
-      let statusId = req.params.id
-      console.log(statusId);
+
       Client.connect(url, { useNewUrlParser: true }, function(err, client) {
         if(err) {
             console.log(err)
@@ -36,17 +35,18 @@ const users = {
 
         const db = client.db("theWall")
         const collection = db.collection("users")
-        let data = ObjectId(statusId);
-        collection.find(data, (err) => {
-          if( err ) {
-            console.log( err);
-            client.close();
-            return;
-          }
-          console.log('Found user');
+
+        let cursor = collection.find(ObjectId(id))
+
+        cursor.forEach(function(doc, err){
+          callback(doc)
+        }, function(){
           client.close();
-        })
-        })
+        });
+
+      })
+
+
     },
     createOrUpdate: function(req) {
 
