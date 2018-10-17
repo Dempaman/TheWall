@@ -226,6 +226,29 @@ textarea::placeholder {
     margin: 10px 20px;
     font-size: 14px;
     color: #2f2f2f;
-    padding-bottom: 10px;
+    padding: 7px;
     border-bottom: 0.5px solid lightgray;
+    border: 1px solid rgba(61, 92, 153, 0.5);
+    outline: none;
+}
+
+.statusText button {
+    outline: none;
+    border: none;
+    height: 30px;
+    padding: 7px 20px;
+    background-color: #3d5c99;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.statusText .discard {
+    background-color: white;
+    color: #993d3d;
+    font-weight: 600;
 }

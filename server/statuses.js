@@ -22,7 +22,7 @@ const statuses = {
             const users_collection = db.collection("users")
             const statuses_collection = db.collection("statuses")
 
-            query = {_id: ObjectId(user_id)}
+            let query = {_id: ObjectId(user_id)}
             users_collection.findOne(query, function(err, result) {
               if (err) throw err;
 
@@ -47,10 +47,6 @@ const statuses = {
 
         });
       });
-    },
-    get: function(req) {
-        let statusId = req.params.id
-        return "You got me!"
     },
     createOrUpdate: function(req, callback) {
 
