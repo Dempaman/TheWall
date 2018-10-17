@@ -34,8 +34,7 @@ class Profile extends Component {
           this.props.userFriends.map(data =>
               <div className="sugFriendStl"  key={data._id}>
                   <img className="sugProfileImg" src={data.url} alt="Profile" />
-                  <p>{data.first_name}</p>
-                  <p>{data.last_name}</p>
+                  <p>{data.first_name} {data.last_name}</p>
               </div>
           )
 

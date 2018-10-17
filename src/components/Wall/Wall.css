@@ -131,7 +131,7 @@ textarea::placeholder {
     padding-bottom: 5px;
     padding-left: 15px;
     padding-right: 15px;
-    top: 0em;
+    top: 0.5em;
     left: -2em;
     background: white;
     border-radius: 5px;
