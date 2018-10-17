@@ -42,17 +42,21 @@ app.get("/api/users", (req, res) => {
 })
 
 app.get("/api/user/:id", (req, res) => {
-    res.send(users.get(req))
+    users.get(req.params.id, function(getId) {
+      res.send(getId);
+    })
 })
 
-app.get("/api/statuses", (req, res) => {
-  statuses.getAll().then((data)=>{
+app.get("/api/statuses/:id", (req, res) => {
+  statuses.getAll(req).then((data)=>{
     res.send(data)
   })
 })
 
 app.get("/api/status/:id", (req, res) => {
-    res.send(statuses.get(req))
+    statuses.get(req.params.id, function(getId) {
+      res.send(getId);
+    })
 })
 
 app.put("/api/user/", (req, res) => {

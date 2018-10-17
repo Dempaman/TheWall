@@ -7,17 +7,31 @@ class Profile extends Component {
   constructor(props){
     super(props);
     this.state = {
-        show: true
+        user: this.props.user,
+        userFriends: this.props.userFriends,
+        userGroups: this.props.userGroups,
+        showFriends: true,
+        showGroups: true,
     }
   }
 
-  toggleDiv() {
-    this.setState({ show: !this.state.show })
+  toggleFriendsDiv() {
+    this.setState({ showFriends: !this.state.showFriends })
+  }
+
+  toggleGroupsDiv() {
+    this.setState({ showGroups: !this.state.showGroups })
   }
 
   render() {
+      const isUserFriends = this.props.userFriends
+      let friendList;
 
-          const list =  this.props.friends.map(data =>
+      if(!isUserFriends){
+          friendList = <div>loading friends..</div>
+      } else {
+          friendList =
+          this.props.userFriends.map(data =>
               <div className="sugFriendStl"  key={data._id}>
                   <div className="sugProfileDiv" style={{backgroundImage: `url(${data.url})`}} >
                       {/*<img className="sugProfileImg" src={data.url} alt="Profile" />*/}
@@ -26,6 +40,21 @@ class Profile extends Component {
                   <p>{data.last_name}</p>
               </div>
           )
+
+      const isUserGroups = this.props.userGroups
+      let groupList;
+
+      if(!isUserGroups){
+          groupList = <div>loading groups..</div>
+      } else {
+          groupList =
+          this.props.userGroups.map(data =>
+              <div className="sugGroupStl"  key={data._id}>
+                  <h6>{data.name}</h6>
+                  <p>{data.description}</p>
+              </div>
+          )
+      }
 
     return (
       <div className="mainProfileContainer">
@@ -43,17 +72,28 @@ class Profile extends Component {
           <div className="sugFriendContainer">
             <div className="SugParagrafText">
               <p>Online Friends</p>
-              <p>{this.props.name}</p>
-              <img onClick={() => this.toggleDiv()} src={this.state.show ? arrowDown : arrowUp} alt="arrow"/>
+              <img onClick={() => this.toggleFriendsDiv()} src={this.state.showFriends ? arrowDown : arrowUp} alt="arrow"/>
             </div>
             <div className="sugInnerFriendContainer">
-              {this.state.show ? <div>{list}</div> :false}
+              {this.state.showFriends ? <div>{friendList}</div> :false}
             </div>
           </div>
+
+          <div className="sugGroupContainer">
+            <div className="SugParagrafText">
+              <p>Your Groups</p>
+              <img onClick={() => this.toggleGroupsDiv()} src={this.state.showGroups ? arrowDown : arrowUp} alt="arrow"/>
+            </div>
+            <div className="sugInnerFriendContainer">
+              {this.state.showGroups ? <div>{groupList}</div> :false}
+            </div>
+          </div>
+
         </div>
       </div>
     );
   }
+}
 }
 
 export default Profile;

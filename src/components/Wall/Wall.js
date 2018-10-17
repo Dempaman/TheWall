@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Wall.css';
 
-const API = 'http://localhost:4000/api/statuses';
+const API = 'http://localhost:4000/api/statuses/';
 
 
 class Wall extends Component {
@@ -92,7 +92,7 @@ class Wall extends Component {
 
 
     fetchStatuses(){
-        fetch(API)
+        fetch(API + this.state.user._id)
         .then(response => response.json())
         .then(data => this.setState({
             apiStatus: data
@@ -179,11 +179,16 @@ class Wall extends Component {
                         </div>
                     </div>
                     <div className="info">
+                    { this.state.user._id == data.author ?
+                      <React.Fragment>
                         <button className="infoDots">...</button>
                         <div className="options">
                             <button onClick={() => this.enableEdit(data)}>Edit</button>
                             <button onClick={() => this.deleteStatus(data)}>Delete</button>
                         </div>
+                      </React.Fragment>
+                        : null
+                    }
                     </div>
                 </div>
                 <div className="statusText">

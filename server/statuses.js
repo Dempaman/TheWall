@@ -7,7 +7,8 @@ let error = msg => {
 }
 
 const statuses = {
-    getAll: function() {
+    getAll: function(req) {
+      let user_id = req.params.id
       return new Promise((resolve, reject)=>{
         let res;
 
@@ -18,18 +19,32 @@ const statuses = {
             }
 
             const db = client.db("theWall")
-            const collection = db.collection("statuses")
+            const users_collection = db.collection("users")
+            const statuses_collection = db.collection("statuses")
 
-            collection.aggregate([{ $sort : { timestamp : -1} }, { $limit : 30 } ] ).toArray((err, docs) => {
-                client.close()
-                if(err) {
-                    console.log(err)
-                    res = error(err.message)
-                    return true
-                }
-                res = docs
-                resolve(res)
-            })
+            query = {_id: ObjectId(user_id)}
+            users_collection.findOne(query, function(err, result) {
+              if (err) throw err;
+
+
+                let friends_ids = result.friends.map(function(id) { return ObjectId(id); });
+                friends_ids.push(ObjectId(user_id))
+
+
+                statuses_collection.aggregate([{ $match: { author: { $in: friends_ids}}}, { $sort : { timestamp : -1} }, { $limit : 30 }] ).toArray((err, docs) => {
+                    client.close()
+                    if(err) {
+                        console.log(err)
+                        res = error(err.message)
+                        return true
+                    }
+                    res = docs
+                    resolve(res)
+                })
+              }
+            );
+
+
         });
       });
     },
@@ -66,7 +81,7 @@ const statuses = {
             }
 
             collection.updateOne(query, {
-                $set: { text: status.text, author: status.author, timestamp: status.timestamp, likes: status.likes, comments: status.comments }
+                $set: { text: status.text, author: ObjectId(status.author), timestamp: status.timestamp, likes: status.likes, comments: status.comments }
             }, { upsert: true }, function(err, res) {
                 if(err) {
                     callback(error(err.message))
@@ -78,35 +93,6 @@ const statuses = {
                 client.close()
             })
         })
-
-        /*return new Promise((resolve, reject)=>{
-            let query;
-            Client.connect(url, { useNewUrlParser: true }, (err, client) => {
-                if(err) {
-                    console.log(err)
-                    return error(err.message)
-                }
-
-                const db = client.db("theWall")
-                const collection = db.collection("statuses")
-
-                if (status._id) {
-                    query = {_id: ObjectId(status._id)};
-                } else {
-                    query = {};
-                }
-
-                console.log(query)
-
-                collection.updateOne(query, {
-                    $set: {text: status.text, author: status.author, timestamp: status.timestamp, likes: status.likes, comments: status.comments}
-                }, { upsert: true }, function(res, err) {
-                    console.log(res)
-                    console.log(err)
-                    resolve(res)
-                })
-            })
-        });*/
     },
     remove: function(id, callback) {
         Client.connect(url, { useNewUrlParser: true }, (err, client) => {

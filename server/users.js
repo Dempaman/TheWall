@@ -24,34 +24,29 @@ const users = {
         });
       });
     },
-    get: function(req) {
-      let statusId = req.params.id
+    get: function(id, callback) {
 
-      /*Client.connect(url, { useNewUrlParser: true }, function(err, client) {
+
+      Client.connect(url, { useNewUrlParser: true }, function(err, client) {
+        if(err) {
+            console.log(err)
+            return error(err.message)
+        }
 
         const db = client.db("theWall")
         const collection = db.collection("users")
-        //collection.aggregate([{$match: {_id: statusId}}])
 
-        collection.aggregate([{$match: {_id: statusId}}], (err) => {
-          if( err ) {
-            console.log('Failed to get userId. ', err);
-            client.close();
-            return;
-          }
-            console.log('User found');
-            client.close();
-        })*/
-        /*collection.createIndex(data, (err) => {
-          if( err ) {
-            console.log('Failed to create index. ', err);
-            client.close();
-            return;
-          }
-          console.log('Index created. Closing client...');
+        let cursor = collection.find(ObjectId(id))
+
+        cursor.forEach(function(doc, err){
+          callback(doc)
+        }, function(){
           client.close();
-        })*/
-      //})
+        });
+
+      })
+
+
     },
     createOrUpdate: function(req) {
 
