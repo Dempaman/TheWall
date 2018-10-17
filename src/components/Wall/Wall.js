@@ -129,7 +129,16 @@ class Wall extends Component {
 
     commitChange = data => {
         let newData = { ...data, text: this.state.text }
-        //fetch(API,)
+        this.updateStatus(newData.text, newData.author, newData._id)
+        this.setState({ edit: false })
+    }
+
+    updateStatus = (update, author, id) => {
+        fetch("http://localhost:4000/api/status?text=" + update + "&author=" + author + "&_id=" + id, { method: "PUT" })
+        .then(res => res.json())
+        .then( data => {
+            this.fetchStatuses()
+        })
     }
 
     putStatus = () => {
@@ -163,7 +172,7 @@ class Wall extends Component {
             <div key={data._id} className="statusContainer">
                 <div className="userInfoCard">
                     <div className="imageHeader">
-                        <img className="userImage" src={data.image} alt="avatar"/>
+                        <div className="userImage" style={{backgroundImage: `url(${data.image})`}}></div>
                         <div className="userNameTime">
                             <h4>{data.name}</h4>
                             <p>{data.timeAgo}</p>
