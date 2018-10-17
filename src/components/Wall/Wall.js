@@ -128,17 +128,28 @@ class Wall extends Component {
     }
 
     commitChange = data => {
-        let newData = { ...data, text: this.state.text }
-        this.updateStatus(newData.text, newData.author, newData._id)
-        this.setState({ edit: false })
-    }
+        console.log(data)
+        console.log(this.state.matchedStatus)
 
-    updateStatus = (update, author, id) => {
-        fetch("http://localhost:4000/api/status?text=" + update + "&author=" + author + "&_id=" + id, { method: "PUT" })
+        let newData = this.state.matchedStatus.map( status => {
+            if(status._id === data._id) {
+                status.text = this.state.text
+                return status
+            }
+            else {
+                return status
+            }
+        })
+
+        this.setState({ matchedStatus: newData })
+
+        fetch("http://localhost:4000/api/status?text=" + this.state.text + "&author=" + data.author + "&timestamp=" + data.time + "&_id=" + data._id, { method: "PUT" })
         .then(res => res.json())
         .then( data => {
-            this.fetchStatuses()
+            console.log(data)
         })
+
+        this.disableEdit()
     }
 
     putStatus = () => {
@@ -147,24 +158,6 @@ class Wall extends Component {
         .then( data => {
             this.fetchStatuses()
         })
-
-        /*fetch("http://localhost:4000/api/status", {
-            method: 'PUT',
-            body: JSON.stringify({
-                text: 'test2',
-                author: "5bbf5bd9adasc390a78",
-                timestamp: 'time',
-                likes: [],
-                comments: [],
-            }),
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-        })
-        .then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
-        .catch(error => console.error('Error:', error));*/
     }
 
     render() {
@@ -179,7 +172,7 @@ class Wall extends Component {
                         </div>
                     </div>
                     <div className="info">
-                    { this.state.user._id == data.author ?
+                    { this.state.user._id === data.author ?
                       <React.Fragment>
                         <button className="infoDots">...</button>
                         <div className="options">
@@ -193,11 +186,11 @@ class Wall extends Component {
                 </div>
                 <div className="statusText">
                     { this.state.editStatus === data._id && this.state.edit
-                        ?   <React.Fragment>
+                        ?   <div className="edit">
                                 <input type="text" value={this.state.text} onChange={this.handleInputChange} />
                                 <button onClick={() => this.commitChange(data)}>Save</button>
-                                <button onClick={this.disableEdit}>Discard</button>
-                            </React.Fragment>
+                                <button className="discard" onClick={this.disableEdit}>Discard</button>
+                            </div>
                         : <p>{data.text}</p>
                     }
                 </div>
