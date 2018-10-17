@@ -10,12 +10,24 @@ body{
 .profileImg {
   margin: 20px auto;
   border-radius: 50%;
+  height: 82px;
   width: 82px;
+  background-size: cover;
+  background-position: center center;
 }
 
 .sugProfileImg {
   border-radius: 50%;
   height: 42px;
+  width: 42px;
+}
+
+.sugProfileDiv {
+    border-radius: 100%;
+    height: 42px;
+    width: 42px;
+    background-size: cover;
+    background-position: center center;
 }
 
 .mainProfileContainer {
@@ -80,9 +92,6 @@ body{
   margin: 10px 0px;
 }
 
-.sugFriendStl > div{
-  padding-right: 10px;
-}
 
 .sugFriendStl > p {
   font-size: 0.8em;

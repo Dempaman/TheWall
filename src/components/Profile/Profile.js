@@ -19,7 +19,9 @@ class Profile extends Component {
 
           const list =  this.props.friends.map(data =>
               <div className="sugFriendStl"  key={data._id}>
-                  <img className="sugProfileImg" src={data.url} alt="Profile" />
+                  <div className="sugProfileDiv" style={{backgroundImage: `url(${data.url})`}} >
+                      {/*<img className="sugProfileImg" src={data.url} alt="Profile" />*/}
+                  </div>
                   <p>{data.first_name}</p>
                   <p>{data.last_name}</p>
               </div>
@@ -29,13 +31,13 @@ class Profile extends Component {
       <div className="mainProfileContainer">
         <div>
           <div className="profileDiv" key={this.props.user._id}>
-            <img className="profileImg" src={this.props.user.url} alt="Profile" />
+            <div className="profileImg" style={{backgroundImage: `url(${this.props.user.url})`}}></div>
             <p className="profileNameStl">{this.props.user.first_name}</p>
             <p className="profileEmailStl">{this.props.user.email}</p>
           </div>
         </div>
         <div className="editProfileButtonDiv">
-          <button className="editProfileButton">Edit Profile</button>
+          {/*<button className="editProfileButton">Edit Profile</button>*/}
         </div>
         <div>
           <div className="sugFriendContainer">

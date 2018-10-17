@@ -129,7 +129,6 @@ class Wall extends Component {
 
     commitChange = data => {
         let newData = { ...data, text: this.state.text }
-
         //fetch(API,)
     }
 
