@@ -66,7 +66,6 @@ class Profile extends Component {
           </div>
         </div>
         <div className="editProfileButtonDiv">
-          {/*<button className="editProfileButton">Edit Profile</button>*/}
         </div>
         <div>
           <div className="sugFriendContainer">

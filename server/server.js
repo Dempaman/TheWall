@@ -71,6 +71,18 @@ app.put("/api/status", (req, res) => {
     })
 })
 
+app.put("/api/status/likes/:status_id/:user_Id", (req, res) => {
+    statuses.likeStatus(req, function(data) {
+        res.send(data)
+    })
+})
+
+app.put("/api/status/dislikes/:status_id/:user_Id", (req, res) => {
+    statuses.dislikeStatus(req, function(data) {
+        res.send(data)
+    })
+})
+
 
 app.delete("/api/user/:id", (req, res) => {
     users.remove(req.params.id, function(removeById) {

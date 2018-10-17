@@ -110,6 +110,54 @@ const statuses = {
 
             client.close()
         })
+    },
+    likeStatus: function(req, callback) {
+        let addOrRemoveId;
+        Client.connect(url, { useNewUrlParser: true }, (err, client) => {
+            if(err) {
+                console.log(err)
+                callback(error(err.message))
+            }
+
+            const db = client.db("theWall")
+            const collection = db.collection("statuses")
+            let query = { _id: ObjectId(req.params.status_id) }
+
+                collection.updateOne(query, { $addToSet: { likes: req.params.user_Id  }}  , function(err, res) {
+                    if(err) {
+                        callback(error(err.message))
+                        client.close()
+                        return true
+                    }
+                    callback(res)
+                    client.close()
+                })
+
+        })
+    },
+    dislikeStatus: function(req, callback) {
+        let addOrRemoveId;
+        Client.connect(url, { useNewUrlParser: true }, (err, client) => {
+            if(err) {
+                console.log(err)
+                callback(error(err.message))
+            }
+
+            const db = client.db("theWall")
+            const collection = db.collection("statuses")
+            let query = { _id: ObjectId(req.params.status_id) }
+
+                collection.updateOne(query, { $pull: { likes: req.params.user_Id  }}  , function(err, res) {
+                    if(err) {
+                        callback(error(err.message))
+                        client.close()
+                        return true
+                    }
+                    callback(res)
+                    client.close()
+                })
+
+        })
     }
 }
 

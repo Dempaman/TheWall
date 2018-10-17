@@ -22,6 +22,7 @@
   border-radius: 5px;
   -webkit-box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
   box-shadow: 0 0 25px rgba(35, 31, 32, 0.1);
+  border-bottom: 0.5px solid lightgray;
 }
  .optionCreate{
    width: 90%;
@@ -210,7 +211,6 @@ textarea::placeholder {
   display: flex;
   flex-direction: row;
   align-content: flex-start;
-  border-bottom: 0.5px solid lightgray;
 }
 
 .statusText p{
@@ -251,4 +251,53 @@ textarea::placeholder {
     background-color: white;
     color: #993d3d;
     font-weight: 600;
+}
+
+.likeContainer{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: left;
+}
+
+.likeNumber {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 9px 10px 0px;
+    border-bottom: 0.5px solid lightgray;
+}
+
+.likeNumber > img {
+    height: 18px;
+    width: 18px;
+}
+
+.likeNumber > p {
+    color: #726f6f;
+    padding-left: 10px;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.likeImg {
+    width: 26px;
+    cursor: pointer;
+    padding: 10px 10px 10px 5px;
+}
+
+.likeDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.likeDiv > p {
+    color: #726f6f;
+    padding: 15px 0px 0px 0px;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.likeImg:hover{
+    background-color: #E6E5E5;
 }

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import like from './icons8-thumbs-up-50.png';
+import likeFilled from './icons8-thumbs-up-filled-50.png';
+import smallLike from './icons8-thumbs-up-48.png';
+
 import './Wall.css';
 
 const API = 'http://localhost:4000/api/statuses/';
@@ -16,6 +20,7 @@ class Wall extends Component {
             edit: false,
             text: "",
             textArea: "",
+            like: true,
         }
     }
 
@@ -47,7 +52,8 @@ class Wall extends Component {
                         author: statuses[e].author,
                         timeAgo: timeSince(new Date(Date.now() - compare)),
                         _id: statuses[e]._id,
-                        image: users[i].url
+                        image: users[i].url,
+                        likes: statuses[e].likes
                     }
                     //Func that tells how long ago status was posted
                     function timeSince(date) {
@@ -143,7 +149,7 @@ class Wall extends Component {
 
         this.setState({ matchedStatus: newData })
 
-        fetch("http://localhost:4000/api/status?text=" + this.state.text + "&author=" + data.author + "&timestamp=" + data.time + "&_id=" + data._id, { method: "PUT" })
+        fetch("http://localhost:4000/api/status/" + data._id, { method: "GET" })
         .then(res => res.json())
         .then( data => {
             console.log(data)
@@ -159,6 +165,24 @@ class Wall extends Component {
             this.fetchStatuses()
         })
     }
+
+    likeStatus = status => {
+        fetch("http://localhost:4000/api/status/likes/" + status._id + "/"+ this.props.user._id, { method: "PUT" })
+        .then(res => res.json())
+        .then( data => {
+            this.fetchStatuses()
+        })
+
+    }
+
+    dislikeStatus = status => {
+        fetch("http://localhost:4000/api/status/dislikes/" + status._id + "/"+ this.props.user._id, { method: "PUT" })
+        .then(res => res.json())
+        .then( data => {
+            this.fetchStatuses()
+        })
+    }
+
 
     render() {
         const list = this.state.matchedStatus.map(data =>
@@ -194,6 +218,20 @@ class Wall extends Component {
                         : <p>{data.text}</p>
                     }
                 </div>
+                <div className="likeContainer">
+
+                    <div className="likeNumber">
+                        <img src={smallLike} alt="smallLike"/>
+                        <p>{data.likes.length}</p>
+                    </div>
+                    <div className="likeDiv">
+                        { !data.likes.includes(this.state.user._id) ?
+                            <img className="likeImg" onClick={() => this.likeStatus(data)} src={like} alt="like"/>
+                            : <img className="likeImg" onClick={() => this.dislikeStatus(data)} src={likeFilled} alt="dislike"/>
+                        }
+                        <p>Like</p>
+                    </div>
+                </div>
             </div>
         );
         return (
@@ -207,7 +245,6 @@ class Wall extends Component {
                 </div>
                 </div>
                 {list}
-
             </div>
         );
     }
