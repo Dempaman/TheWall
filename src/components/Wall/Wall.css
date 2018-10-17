@@ -298,6 +298,10 @@ textarea::placeholder {
     font-family: 'Montserrat', sans-serif;
 }
 
+.likeDiv > img {
+  height: 25px;
+}
+
 .likeImg:hover{
     background-color: #E6E5E5;
 }
