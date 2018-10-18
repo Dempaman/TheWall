@@ -283,7 +283,7 @@ textarea::placeholder {
 .likeImg {
     width: 26px;
     cursor: pointer;
-    padding: 10px 10px 10px 5px;
+    padding: 10px 5px 10px 0px;
 }
 
 .likeDiv {
