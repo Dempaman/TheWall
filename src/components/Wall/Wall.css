@@ -303,5 +303,5 @@ textarea::placeholder {
 }
 
 .likeImg:hover{
-    background-color: #E6E5E5;
+  transform: scale(1.1);
 }
