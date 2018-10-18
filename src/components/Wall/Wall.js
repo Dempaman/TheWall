@@ -149,7 +149,7 @@ class Wall extends Component {
 
         this.setState({ matchedStatus: newData })
 
-        fetch("http://localhost:4000/api/status/" + data._id, { method: "GET" })
+        fetch("http://localhost:4000/api/status?text=" + this.state.text + "&author=" + data.author + "&timestamp=" + data.time + "&_id=" + data._id, { method: "PUT" })
         .then(res => res.json())
         .then( data => {
             console.log(data)
