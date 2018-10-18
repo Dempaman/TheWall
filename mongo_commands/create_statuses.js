@@ -60,7 +60,7 @@ Client.connect(url, { useNewUrlParser: true }, (err, client) => {
 
 function generateStatus(author){
     // create one random status object.
-    const n1 = ['Fint väder idag.', 'Kul med skola.', 'Jag heter kanske bengt.', 'Vem var det som kastade?', 'Röker du mycket eller?', 'Du har fågel?', 'Fint folk kommer sent.', 'A wizard is never late.', 'Vem är jag?', 'Det var baskamig lite törrt.', 'Är jag vaken eller?', 'omg lasers, pew, pew, pew!', 'sy gytt!', 'Vad gör vi nu? ...eller va gör vi sen?', 'tjeeeennaaaaaa', 'Det är skön      t.',];
+    const n1 = ['Fint väder idag.', 'Kul med skola.', 'Jag heter kanske bengt.', 'Vem var det som kastade?', 'Röker du mycket eller?', 'Du har fågel?', 'Fint folk kommer sent.', 'A wizard is never late.', 'Vem är jag?', 'Det var baskamig lite törrt.', 'Är jag vaken eller?', 'omg lasers, pew, pew, pew!', 'sy gytt!', 'Vad gör vi nu? ...eller va gör vi sen?', 'tjeeeennaaaaaa', 'Det är skön      t.', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'];
 
     let r1 = Math.floor(Math.random() * n1.length);
     let text = `${n1[r1]}`;

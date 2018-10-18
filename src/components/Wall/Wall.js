@@ -134,9 +134,6 @@ class Wall extends Component {
     }
 
     commitChange = data => {
-        console.log(data)
-        console.log(this.state.matchedStatus)
-
         let newData = this.state.matchedStatus.map( status => {
             if(status._id === data._id) {
                 status.text = this.state.text
