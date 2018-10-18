@@ -96,7 +96,6 @@ function generateUser(){
     'https://c1.staticflickr.com/8/7579/15671305855_0cbe715034_b.jpg',
     'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Official_portrait_of_Andy_McDonald_crop_2.jpg/1200px-Official_portrait_of_Andy_McDonald_crop_2.jpg',
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGSAjdnJjshx2FPDP9zABg0NZoOzmRnUae0P_rusHyO0hxVPCQ_w",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPFBpWU_UxdQn2CfJN9HyvQB_10YEFBCMoopVcjObGt2yv5gW0http://beauty411.net/wp-content/uploads/2013/10/BB-Smokey-Eye-Collection-model-400x349.jpg",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGJ3K2RXdlwLoumBPOFD2yKbAuByhl_T5_uf6VI92MaHupq_4",
     "https://galeri12.uludagsozluk.com/513/kumral-erkek_906340.jpg",
     "http://res.freestockphotos.biz/pictures/13/13376-vintage-portrait-of-professor-flammarion-pv.jpg",

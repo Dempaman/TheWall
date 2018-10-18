@@ -6,7 +6,6 @@ class Groups extends Component {
         fetch("http://localhost:4000/api/group/" + groupId + "/join/" + userId, { method: "PUT" })
         .then( res => res.json())
         .then( data => {
-            console.log(data)
             this.props.refreshGroups()
         })
     }
@@ -31,7 +30,7 @@ class Groups extends Component {
 
         return isMember;
     }
-    
+
     render() {
         return (
             <div className="onlineGroups">
@@ -47,10 +46,10 @@ class Groups extends Component {
                                     { this.isMember(group)
                                         ?   <button onClick={() => this.leaveGroup(group._id, this.props.user._id)}>
                                                 <p>Leave</p>
-                                            </button> 
+                                            </button>
                                         :   <button onClick={() => this.joinGroup(group._id, this.props.user._id)}>
                                                 <p>Join</p>
-                                            </button> 
+                                            </button>
                                     }
                                 </div>
                                 <div className="right">
