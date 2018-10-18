@@ -8,6 +8,18 @@ import Header from './components/Header.js';
 const apiUsersEndpoint = 'http://localhost:4000/api/users'
 const apiGroupsEndpoint = "http://localhost:4000/api/groups"
 
+const firebase = require("firebase")
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCeJGHtFw2vESNk1Y1JfluFqsHariJigUY",
+    authDomain: "thewall-74369.firebaseapp.com",
+    databaseURL: "https://thewall-74369.firebaseio.com",
+    projectId: "thewall-74369",
+    storageBucket: "thewall-74369.appspot.com",
+    messagingSenderId: "601628493746"
+};
+firebase.initializeApp(config);
+
 class App extends Component {
   constructor(props){
     super(props);
